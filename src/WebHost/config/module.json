@@ -10,15 +10,9 @@
     //是否开启权限验证
     "PermissionValidate": true
   },
-  //任务调度
-  "Quartz": {
-    //是否启用
-    "Enabled": true,
-    //实例名称
-    "InstanceName": "QuartzServer",
-    //表前缀
-    "TablePrefix": "QRTZ_",
-    //序列化方式
-    "SerializerType": "JSON"
+  //通用模块
+  "Common": {
+    //附件上传路径
+    "AttachmentPath": ""
   }
 }
