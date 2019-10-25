@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Nm.Module.PersonnelFiles.Application.PositionService.ViewModels
+namespace NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels
 {
     /// <summary>
     /// 岗位添加模型

@@ -3,22 +3,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.Options;
-using Nm.Lib.Auth.Abstractions;
-using Nm.Lib.Utils.Core.Extensions;
-using Nm.Lib.Utils.Core.Models;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.Admin.Application.AccountService;
-using Nm.Module.Admin.Application.AccountService.ViewModels;
-using Nm.Module.Admin.Domain.Account;
-using Nm.Module.Admin.Domain.AccountRole;
-using Nm.Module.PersonnelFiles.Application.DepartmentService;
-using Nm.Module.PersonnelFiles.Application.UserService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.User;
-using Nm.Module.PersonnelFiles.Domain.User.Models;
-using Nm.Module.PersonnelFiles.Domain.UserContact;
-using Nm.Module.PersonnelFiles.Infrastructure.Options;
+using NetModular.Lib.Auth.Abstractions;
+using NetModular.Lib.Utils.Core.Extensions;
+using NetModular.Lib.Utils.Core.Models;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.Admin.Application.AccountService;
+using NetModular.Module.Admin.Application.AccountService.ViewModels;
+using NetModular.Module.Admin.Domain.Account;
+using NetModular.Module.Admin.Domain.AccountRole;
+using NetModular.Module.PersonnelFiles.Application.DepartmentService;
+using NetModular.Module.PersonnelFiles.Application.UserService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.User;
+using NetModular.Module.PersonnelFiles.Domain.User.Models;
+using NetModular.Module.PersonnelFiles.Domain.UserContact;
+using NetModular.Module.PersonnelFiles.Infrastructure.Options;
 
-namespace Nm.Module.PersonnelFiles.Application.UserService
+namespace NetModular.Module.PersonnelFiles.Application.UserService
 {
     public class UserService : IUserService
     {
@@ -67,7 +67,7 @@ namespace Nm.Module.PersonnelFiles.Application.UserService
 
             if (maxJobNumber < 1)
             {
-                //Ä¬ÈÏ100000
+                //Ä¬ï¿½ï¿½100000
                 maxJobNumber = 100000;
             }
 
@@ -199,7 +199,7 @@ namespace Nm.Module.PersonnelFiles.Application.UserService
         }
 
         /// <summary>
-        /// Çå³ýÁªÏµ·½Ê½µÄÇøÓòÐÅÏ¢
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         /// </summary>
         /// <param name="entity"></param>
         private void ClearContactAreaInfo(UserContactEntity entity)
@@ -215,7 +215,7 @@ namespace Nm.Module.PersonnelFiles.Application.UserService
         }
 
         /// <summary>
-        /// ÉèÖÃÁªÏµ·½Ê½µÄÇøÓòÐÅÏ¢
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="areaInfo"></param>

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Nm.Module.PersonnelFiles.Application.UserEducationHistoryService.ViewModels
+namespace NetModular.Module.PersonnelFiles.Application.UserEducationHistoryService.ViewModels
 {
     public class UserEducationHistoryUpdateModel : UserEducationHistoryAddModel
     {

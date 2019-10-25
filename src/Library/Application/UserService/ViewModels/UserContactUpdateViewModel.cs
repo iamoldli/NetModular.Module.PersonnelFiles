@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Nm.Lib.Utils.Core.Models;
+using NetModular.Lib.Utils.Core.Models;
 
-namespace Nm.Module.PersonnelFiles.Application.UserService.ViewModels
+namespace NetModular.Module.PersonnelFiles.Application.UserService.ViewModels
 {
     public class UserContactUpdateViewModel
     {

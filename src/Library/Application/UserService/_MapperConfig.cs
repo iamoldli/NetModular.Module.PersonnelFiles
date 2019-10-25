@@ -1,10 +1,10 @@
 using AutoMapper;
-using Nm.Lib.Mapper.AutoMapper;
-using Nm.Module.PersonnelFiles.Application.UserService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.User;
-using Nm.Module.PersonnelFiles.Domain.UserContact;
+using NetModular.Lib.Mapper.AutoMapper;
+using NetModular.Module.PersonnelFiles.Application.UserService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.User;
+using NetModular.Module.PersonnelFiles.Domain.UserContact;
 
-namespace Nm.Module.PersonnelFiles.Application.UserService
+namespace NetModular.Module.PersonnelFiles.Application.UserService
 {
     public class MapperConfig : IMapperConfig
     {

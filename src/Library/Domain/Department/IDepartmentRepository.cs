@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Nm.Lib.Data.Abstractions;
-using Nm.Module.PersonnelFiles.Domain.Department.Models;
+using NetModular.Lib.Data.Abstractions;
+using NetModular.Module.PersonnelFiles.Domain.Department.Models;
 
-namespace Nm.Module.PersonnelFiles.Domain.Department
+namespace NetModular.Module.PersonnelFiles.Domain.Department
 {
     /// <summary>
     /// 部门仓储

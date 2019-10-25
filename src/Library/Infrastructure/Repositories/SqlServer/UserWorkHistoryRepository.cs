@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nm.Lib.Data.Abstractions;
-using Nm.Lib.Data.Core;
-using Nm.Lib.Data.Query;
-using Nm.Module.PersonnelFiles.Domain.UserWorkHistory;
-using Nm.Module.PersonnelFiles.Domain.UserWorkHistory.Models;
+using NetModular.Lib.Data.Abstractions;
+using NetModular.Lib.Data.Core;
+using NetModular.Lib.Data.Query;
+using NetModular.Module.PersonnelFiles.Domain.UserWorkHistory;
+using NetModular.Module.PersonnelFiles.Domain.UserWorkHistory.Models;
 
-namespace Nm.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
+namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
 {
     public class UserWorkHistoryRepository : RepositoryAbstract<UserWorkHistoryEntity>, IUserWorkHistoryRepository
     {

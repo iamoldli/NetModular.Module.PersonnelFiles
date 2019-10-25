@@ -1,6 +1,6 @@
 using System;
 
-namespace Nm.Module.PersonnelFiles.Application.DepartmentService.ViewModels
+namespace NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewModels
 {
     /// <summary>
     /// 部门添加模型

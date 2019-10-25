@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.CompanyService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.Company.Models;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.CompanyService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.Company.Models;
 
-namespace Nm.Module.PersonnelFiles.Application.CompanyService
+namespace NetModular.Module.PersonnelFiles.Application.CompanyService
 {
     /// <summary>
     /// 公司单位服务

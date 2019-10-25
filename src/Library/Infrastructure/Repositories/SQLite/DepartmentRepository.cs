@@ -1,6 +1,6 @@
-using Nm.Lib.Data.Abstractions;
+using NetModular.Lib.Data.Abstractions;
 
-namespace Nm.Module.PersonnelFiles.Infrastructure.Repositories.SQLite
+namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SQLite
 {
     public class DepartmentRepository : SqlServer.DepartmentRepository
     {

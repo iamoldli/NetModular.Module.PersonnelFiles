@@ -1,4 +1,4 @@
-namespace Nm.Module.PersonnelFiles.Domain.UserEducationHistory
+namespace NetModular.Module.PersonnelFiles.Domain.UserEducationHistory
 {
     public partial class UserEducationHistoryEntity
     {

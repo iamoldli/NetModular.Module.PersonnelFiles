@@ -1,24 +1,24 @@
-using Nm.Lib.Data.Abstractions.Attributes;
-using Nm.Lib.Utils.Core.Extensions;
+using NetModular.Lib.Data.Abstractions.Attributes;
+using NetModular.Lib.Utils.Core.Extensions;
 
-namespace Nm.Module.PersonnelFiles.Domain.User
+namespace NetModular.Module.PersonnelFiles.Domain.User
 {
     public partial class UserEntity
     {
         /// <summary>
-        /// ²¿ÃÅÃû³Æ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         [Ignore]
         public string DepartmentName { get; set; }
 
         /// <summary>
-        /// ¸ÚÎ»Ãû³Æ
+        /// ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         [Ignore]
         public string PositionName { get; set; }
 
         /// <summary>
-        /// ÐÔ±ðÃû³Æ
+        /// ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         [Ignore]
         public string SexName => Sex.ToDescription();

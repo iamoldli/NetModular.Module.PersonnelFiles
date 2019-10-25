@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nm.Lib.Data.Abstractions;
-using Nm.Lib.Data.Core;
-using Nm.Lib.Data.Query;
-using Nm.Module.Admin.Domain.Account;
-using Nm.Module.PersonnelFiles.Domain.Department;
-using Nm.Module.PersonnelFiles.Domain.Department.Models;
-using Nm.Module.PersonnelFiles.Domain.User;
+using NetModular.Lib.Data.Abstractions;
+using NetModular.Lib.Data.Core;
+using NetModular.Lib.Data.Query;
+using NetModular.Module.Admin.Domain.Account;
+using NetModular.Module.PersonnelFiles.Domain.Department;
+using NetModular.Module.PersonnelFiles.Domain.Department.Models;
+using NetModular.Module.PersonnelFiles.Domain.User;
 
-namespace Nm.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
+namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
 {
     public class DepartmentRepository : RepositoryAbstract<DepartmentEntity>, IDepartmentRepository
     {

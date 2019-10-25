@@ -1,4 +1,4 @@
-namespace Nm.Module.PersonnelFiles.Domain.Company
+namespace NetModular.Module.PersonnelFiles.Domain.Company
 {
     public partial class CompanyEntity
     {

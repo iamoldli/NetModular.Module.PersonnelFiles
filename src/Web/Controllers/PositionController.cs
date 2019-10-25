@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Nm.Lib.Auth.Web.Attributes;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.PositionService;
-using Nm.Module.PersonnelFiles.Application.PositionService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.Position.Models;
+using NetModular.Lib.Auth.Web.Attributes;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.PositionService;
+using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.Position.Models;
 
-namespace Nm.Module.PersonnelFiles.Web.Controllers
+namespace NetModular.Module.PersonnelFiles.Web.Controllers
 {
     [Description("岗位管理")]
     public class PositionController : ModuleController

@@ -1,17 +1,17 @@
-using Nm.Lib.Data.Abstractions.Attributes;
+using NetModular.Lib.Data.Abstractions.Attributes;
 
-namespace Nm.Module.PersonnelFiles.Domain.Position
+namespace NetModular.Module.PersonnelFiles.Domain.Position
 {
     public partial class PositionEntity
     {
         /// <summary>
-        /// ²¿ÃÅÃû³Æ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         [Ignore]
         public string DepartmentName { get; set; }
 
         /// <summary>
-        /// ¹«Ë¾µ¥Î»
+        /// ï¿½ï¿½Ë¾ï¿½ï¿½Î»
         /// </summary>
         [Ignore]
         public string CompanyName { get; set; }

@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.DepartmentService;
-using Nm.Module.PersonnelFiles.Application.DepartmentService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.Department.Models;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.DepartmentService;
+using NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.Department.Models;
 
-namespace Nm.Module.PersonnelFiles.Web.Controllers
+namespace NetModular.Module.PersonnelFiles.Web.Controllers
 {
     [Description("部门管理")]
     public class DepartmentController : ModuleController

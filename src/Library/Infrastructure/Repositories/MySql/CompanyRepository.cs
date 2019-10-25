@@ -1,6 +1,6 @@
-using Nm.Lib.Data.Abstractions;
+using NetModular.Lib.Data.Abstractions;
 
-namespace Nm.Module.PersonnelFiles.Infrastructure.Repositories.MySql
+namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.MySql
 {
     public class CompanyRepository : SqlServer.CompanyRepository
     {

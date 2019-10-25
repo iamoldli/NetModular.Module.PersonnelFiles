@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.UserEducationHistoryService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.UserEducationHistory;
-using Nm.Module.PersonnelFiles.Domain.UserEducationHistory.Models;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.UserEducationHistoryService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.UserEducationHistory;
+using NetModular.Module.PersonnelFiles.Domain.UserEducationHistory.Models;
 
-namespace Nm.Module.PersonnelFiles.Application.UserEducationHistoryService
+namespace NetModular.Module.PersonnelFiles.Application.UserEducationHistoryService
 {
     public class UserEducationHistoryService : IUserEducationHistoryService
     {

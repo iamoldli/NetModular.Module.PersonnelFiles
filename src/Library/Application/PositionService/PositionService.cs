@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.PositionService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.Position;
-using Nm.Module.PersonnelFiles.Domain.Position.Models;
-using Nm.Module.PersonnelFiles.Domain.User;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.Position;
+using NetModular.Module.PersonnelFiles.Domain.Position.Models;
+using NetModular.Module.PersonnelFiles.Domain.User;
 
-namespace Nm.Module.PersonnelFiles.Application.PositionService
+namespace NetModular.Module.PersonnelFiles.Application.PositionService
 {
     public class PositionService : IPositionService
     {
@@ -38,7 +38,7 @@ namespace Nm.Module.PersonnelFiles.Application.PositionService
             var entity = _mapper.Map<PositionEntity>(model);
             if (await _repository.Exists(entity))
             {
-                return ResultModel.Failed("¸ÚÎ»Ãû³Æ»ò±àÂëÒÑ´æÔÚ");
+                return ResultModel.Failed("ï¿½ï¿½Î»ï¿½ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½");
             }
 
             var result = await _repository.AddAsync(entity);
@@ -49,7 +49,7 @@ namespace Nm.Module.PersonnelFiles.Application.PositionService
         {
             if (await _userRepository.ExistsBindPosition(id))
             {
-                return ResultModel.Failed("ÓÐÈËÔ±°ó¶¨ÁË¸ÃÖ°Î»£¬ÎÞ·¨É¾³ý");
+                return ResultModel.Failed("ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Ë¸ï¿½Ö°Î»ï¿½ï¿½ï¿½Þ·ï¿½É¾ï¿½ï¿½");
             }
 
             var result = await _repository.DeleteAsync(id);
@@ -76,7 +76,7 @@ namespace Nm.Module.PersonnelFiles.Application.PositionService
 
             if (await _repository.Exists(entity))
             {
-                return ResultModel.Failed("¸ÚÎ»Ãû³Æ»ò±àÂëÒÑ´æÔÚ");
+                return ResultModel.Failed("ï¿½ï¿½Î»ï¿½ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½");
             }
 
             var result = await _repository.UpdateAsync(entity);

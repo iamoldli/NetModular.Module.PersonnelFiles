@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using  Nm.Lib.Data.Query;
+using  NetModular.Lib.Data.Query;
 
-namespace  Nm.Module.PersonnelFiles.Domain.UserEducationHistory.Models
+namespace  NetModular.Module.PersonnelFiles.Domain.UserEducationHistory.Models
 {
     public class UserEducationHistoryQueryModel : QueryModel
     {

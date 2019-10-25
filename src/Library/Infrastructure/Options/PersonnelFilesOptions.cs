@@ -1,6 +1,6 @@
-using Nm.Lib.Utils.Core.Options;
+using NetModular.Lib.Utils.Core.Options;
 
-namespace Nm.Module.PersonnelFiles.Infrastructure.Options
+namespace NetModular.Module.PersonnelFiles.Infrastructure.Options
 {
     /// <summary>
     /// 人事档案配置项

@@ -1,8 +1,8 @@
 using System;
-using Nm.Lib.Data.Abstractions.Attributes;
-using Nm.Lib.Data.Core.Entities;
+using NetModular.Lib.Data.Abstractions.Attributes;
+using NetModular.Lib.Data.Core.Entities;
 
-namespace Nm.Module.PersonnelFiles.Domain.UserContact
+namespace NetModular.Module.PersonnelFiles.Domain.UserContact
 {
     /// <summary>
     /// 用户联系信息

@@ -2,12 +2,12 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.UserEducationHistoryService;
-using Nm.Module.PersonnelFiles.Application.UserEducationHistoryService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.UserEducationHistory.Models;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.UserEducationHistoryService;
+using NetModular.Module.PersonnelFiles.Application.UserEducationHistoryService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.UserEducationHistory.Models;
 
-namespace Nm.Module.PersonnelFiles.Web.Controllers
+namespace NetModular.Module.PersonnelFiles.Web.Controllers
 {
     [Description("用户教育经历管理")]
     public class UserEducationHistoryController : ModuleController

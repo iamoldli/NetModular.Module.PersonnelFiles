@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Nm.Lib.Data.Abstractions;
-using Nm.Module.PersonnelFiles.Domain.Position.Models;
+using NetModular.Lib.Data.Abstractions;
+using NetModular.Module.PersonnelFiles.Domain.Position.Models;
 
-namespace Nm.Module.PersonnelFiles.Domain.Position
+namespace NetModular.Module.PersonnelFiles.Domain.Position
 {
     /// <summary>
     /// 岗位仓储

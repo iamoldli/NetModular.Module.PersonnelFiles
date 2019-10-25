@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Nm.Lib.Utils.Core.Extensions;
-using Nm.Lib.Utils.Core.Result;
-using Nm.Module.PersonnelFiles.Application.DepartmentService.ResultModels;
-using Nm.Module.PersonnelFiles.Application.DepartmentService.ViewModels;
-using Nm.Module.PersonnelFiles.Domain.Company;
-using Nm.Module.PersonnelFiles.Domain.Department;
-using Nm.Module.PersonnelFiles.Domain.Department.Models;
-using Nm.Module.PersonnelFiles.Domain.User;
+using NetModular.Lib.Utils.Core.Extensions;
+using NetModular.Lib.Utils.Core.Result;
+using NetModular.Module.PersonnelFiles.Application.DepartmentService.ResultModels;
+using NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewModels;
+using NetModular.Module.PersonnelFiles.Domain.Company;
+using NetModular.Module.PersonnelFiles.Domain.Department;
+using NetModular.Module.PersonnelFiles.Domain.Department.Models;
+using NetModular.Module.PersonnelFiles.Domain.User;
 
-namespace Nm.Module.PersonnelFiles.Application.DepartmentService
+namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
 {
     public class DepartmentService : IDepartmentService
     {
@@ -91,12 +91,12 @@ namespace Nm.Module.PersonnelFiles.Application.DepartmentService
         {
             if (await _repository.ExistsChildren(id))
             {
-                return ResultModel.Failed("ÇëÏÈÉ¾³ý×Ó²¿ÃÅ");
+                return ResultModel.Failed("ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½");
             }
 
             if (await _userRepository.ExistsBindDept(id))
             {
-                return ResultModel.Failed("ÓÐÈËÔ±°ó¶¨ÁË¸Ã²¿ÃÅ£¬ÎÞ·¨É¾³ý");
+                return ResultModel.Failed("ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Ë¸Ã²ï¿½ï¿½Å£ï¿½ï¿½Þ·ï¿½É¾ï¿½ï¿½");
             }
 
             var result = await _repository.DeleteAsync(id);

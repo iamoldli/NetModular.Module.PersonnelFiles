@@ -1,7 +1,7 @@
 using System;
-using  Nm.Lib.Data.Query;
+using  NetModular.Lib.Data.Query;
 
-namespace  Nm.Module.PersonnelFiles.Domain.Position.Models
+namespace  NetModular.Module.PersonnelFiles.Domain.Position.Models
 {
     public class PositionQueryModel : QueryModel
     {

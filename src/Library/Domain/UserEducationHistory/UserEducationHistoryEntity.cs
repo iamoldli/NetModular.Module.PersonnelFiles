@@ -1,8 +1,8 @@
 using System;
-using Nm.Lib.Data.Abstractions.Attributes;
-using Nm.Lib.Data.Core.Entities.Extend;
+using NetModular.Lib.Data.Abstractions.Attributes;
+using NetModular.Lib.Data.Core.Entities.Extend;
 
-namespace Nm.Module.PersonnelFiles.Domain.UserEducationHistory
+namespace NetModular.Module.PersonnelFiles.Domain.UserEducationHistory
 {
     /// <summary>
     /// 用户教育经历

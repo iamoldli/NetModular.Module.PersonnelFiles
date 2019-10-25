@@ -1,6 +1,6 @@
-using Nm.Lib.Data.Query;
+using NetModular.Lib.Data.Query;
 
-namespace Nm.Module.PersonnelFiles.Domain.User.Models
+namespace NetModular.Module.PersonnelFiles.Domain.User.Models
 {
     public class UserQueryModel : QueryModel
     {
