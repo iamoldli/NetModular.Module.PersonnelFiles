@@ -31,7 +31,7 @@
   </nm-form-dialog>
 </template>
 <script>
-import { mixins } from 'nm-lib-skins'
+import { mixins } from 'netmodular-ui'
 
 const api = $api.personnelFiles.userEducationHistory
 

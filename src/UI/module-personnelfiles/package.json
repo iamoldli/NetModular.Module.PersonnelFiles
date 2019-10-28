@@ -1,6 +1,6 @@
 {
-    "name": "nm-module-personnelfiles",
-    "version": "1.1.4",
+    "name": "netmodular-module-personnelfiles",
+    "version": "1.0.0",
     "code": "personnelFiles",
     "title": "人事档案",
     "description": "人事档案",
@@ -17,11 +17,8 @@
         "pub": "cd ../../../script && npm_publish.ps1"
     },
     "dependencies": {
-        "nm-lib-icon": "^1.2.9",
-        "nm-lib-skins": "^1.5.2",
-        "nm-lib-utils": "^1.2.3",
-        "nm-module-admin": "^1.3.6",
-        "nm-module-common": "^1.1.10"
+        "netmodular-module-admin": "^1.0.1",
+        "netmodular-module-common": "^1.0.1"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.10.0",

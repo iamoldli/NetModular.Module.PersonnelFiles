@@ -27,7 +27,7 @@
   </nm-list-dialog>
 </template>
 <script>
-import { mixins } from 'nm-lib-skins'
+import { mixins } from 'netmodular-ui'
 import page from '../../index/page'
 import cols from './cols'
 import AddPage from '../../../position/components/add'

@@ -21,7 +21,7 @@
   </nm-dialog>
 </template>
 <script>
-import { mixins } from 'nm-lib-skins'
+import { mixins } from 'netmodular-ui'
 import BasePage from './components/base'
 import ContactPage from './components/contact'
 

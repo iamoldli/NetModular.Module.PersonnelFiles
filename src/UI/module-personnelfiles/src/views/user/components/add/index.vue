@@ -103,7 +103,7 @@
   </nm-form-dialog>
 </template>
 <script>
-import { mixins } from 'nm-lib-skins'
+import { mixins } from 'netmodular-ui'
 import DepartmentSelect from '../../../department/components/select'
 import PositionSelect from '../../../position/components/select'
 
