@@ -10,13 +10,13 @@
 
       <!--按钮-->
       <template v-slot:querybar-buttons>
-        <nm-button-has :options="buttons.positionAdd" @click="add(total)" />
+        <nm-button v-bind="buttons.positionAdd" @click="add(total)" />
       </template>
 
       <!--操作列-->
       <template v-slot:col-operation="{row}">
-        <nm-button-has :options="buttons.positionEdit" @click="edit(row)" />
-        <nm-button-delete :options="buttons.positionDel" :action="removeAction" :id="row.id" @success="refresh" />
+        <nm-button v-bind="buttons.positionEdit" @click="edit(row)" />
+        <nm-button-delete v-bind="buttons.positionDel" :action="removeAction" :id="row.id" @success="refresh" />
       </template>
     </nm-list>
 
