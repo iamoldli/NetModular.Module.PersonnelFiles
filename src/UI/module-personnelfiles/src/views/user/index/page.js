@@ -60,7 +60,7 @@ const page = new function() {
         'PersonnelFiles_UserEducationHistory_query_get',
         'PersonnelFiles_UserEducationHistory_add_post',
         'PersonnelFiles_UserEducationHistory_edit_get',
-        'PersonnelFiles_UserEducationHistory_update_get',
+        'PersonnelFiles_UserEducationHistory_update_post',
         'PersonnelFiles_UserEducationHistory_delete_delete'
       ]
     }
