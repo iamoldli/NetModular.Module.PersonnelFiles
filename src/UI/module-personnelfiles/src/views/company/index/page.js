@@ -1,5 +1,5 @@
 /** 页面信息 */
-const page = new function() {
+const page = new (function() {
   this.title = '公司单位'
   this.icon = 'enterprise'
   this.name = 'personnelfiles_company'
@@ -32,13 +32,12 @@ const page = new function() {
       permissions: [`${this.name}_delete_delete`]
     }
   }
-}()
+})()
 
 /** 路由信息 */
 export const route = {
   page,
-  component: () =>
-    import(/* webpackChunkName: "PersonnelFiles.Company" */ './index')
+  component: () => import(/* webpackChunkName: "PersonnelFiles.Company" */ './index')
 }
 
 export default page

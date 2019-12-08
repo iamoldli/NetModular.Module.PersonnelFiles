@@ -1,6 +1,6 @@
 <template>
   <nm-dialog class="nm-user-picture-show" v-bind="dialog" :visible.sync="visible_">
-    <nm-attachment-img :id="user.picture"/>
+    <nm-attachment-img :id="user.picture" />
   </nm-dialog>
 </template>
 <script>

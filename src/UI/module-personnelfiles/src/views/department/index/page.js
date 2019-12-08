@@ -1,5 +1,5 @@
 /** 页面信息 */
-const page = new function() {
+const page = new (function() {
   this.title = '部门列表'
   this.icon = 'department'
   this.name = 'personnelfiles_department'
@@ -50,10 +50,7 @@ const page = new function() {
       type: 'text',
       icon: 'edit',
       code: `${this.name}_position_edit`,
-      permissions: [
-        `PersonnelFiles_position_edit_get`,
-        'PersonnelFiles_position_update_post'
-      ]
+      permissions: [`PersonnelFiles_position_edit_get`, 'PersonnelFiles_position_update_post']
     },
     positionDel: {
       text: '岗位删除',
@@ -63,13 +60,12 @@ const page = new function() {
       permissions: [`PersonnelFiles_position_delete_delete`]
     }
   }
-}()
+})()
 
 /** 路由信息 */
 export const route = {
   page,
-  component: () =>
-    import(/* webpackChunkName: "PersonnelFiles.Department" */ './index')
+  component: () => import(/* webpackChunkName: "PersonnelFiles.Department" */ './index')
 }
 
 export default page

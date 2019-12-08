@@ -16,19 +16,19 @@
         <nm-button v-bind="buttons.add" @click="add" />
       </template>
 
-      <template v-slot:col-name="{row}">
+      <template v-slot:col-name="{ row }">
         <nm-button type="text" :text="row.name" @click="details(row)" />
       </template>
 
-      <template v-slot:col-birthday="{row}">{{$dayjs(row.birthday).format('YYYY年MM月DD日')}}</template>
+      <template v-slot:col-birthday="{ row }">{{ $dayjs(row.birthday).format('YYYY年MM月DD日') }}</template>
 
-      <template v-slot:col-picture="{row}">
+      <template v-slot:col-picture="{ row }">
         <nm-button v-if="row.picture" type="text" text="查看" @click="pictureShow(row)" />
         <span v-else>无</span>
       </template>
 
       <!--操作列-->
-      <template v-slot:col-operation="{row}">
+      <template v-slot:col-operation="{ row }">
         <nm-button v-bind="buttons.edit" @click="edit(row)" />
         <nm-button v-bind="buttons.workHistory" @click="workHistory(row)" />
         <nm-button v-bind="buttons.educationHistory" @click="educationHistory(row)" />

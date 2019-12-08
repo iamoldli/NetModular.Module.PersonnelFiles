@@ -41,8 +41,7 @@ export default {
           name: '',
           code: ''
         },
-        rules: {
-        }
+        rules: {}
       }
     }
   },

@@ -11,12 +11,12 @@
         </el-form-item>
       </template>
 
-      <template v-slot:col-departmentName="{row}">
-        <span>{{row.companyName}} / {{row.departmentName}}</span>
+      <template v-slot:col-departmentName="{ row }">
+        <span>{{ row.companyName }} / {{ row.departmentName }}</span>
       </template>
 
       <!--操作列-->
-      <template v-slot:col-operation="{row}">
+      <template v-slot:col-operation="{ row }">
         <nm-button-delete v-bind="buttons.del" :action="removeAction" :id="row.id" @success="refresh" />
       </template>
     </nm-list>

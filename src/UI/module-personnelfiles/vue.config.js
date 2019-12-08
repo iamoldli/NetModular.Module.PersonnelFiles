@@ -1,13 +1,14 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const isDev = process.env.NODE_ENV === 'development' // 开发环境
+// 开发环境
+const isDev = process.env.NODE_ENV === 'development'
+// 打包输出路径
+const outputDir = '../../WebHost/wwwroot/app'
 
 // 增加环境变量
 process.env.VUE_APP_COPYRIGHT = '版权所有：尼古拉斯·老李 | 用代码改变世界'
 process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYYMDHHmmss')
-// 打包输出路径
-const outputDir = '../../WebHost/wwwroot/app'
 
 module.exports = {
   outputDir: outputDir,
@@ -15,20 +16,42 @@ module.exports = {
   devServer: {
     port: 5224
   },
-  transpileDependencies: ['netmodular-.*', 'element-ui'],
-  configureWebpack: {
-    plugins: [
-      /**
-       * 复制netmodular-ui/public目录下的文件到输出目录
-       */
-      new CopyWebpackPlugin([
-        {
-          from: path.join(__dirname, 'node_modules/netmodular-ui/public'),
-          to: path.join(__dirname, outputDir),
-          ignore: ['index.html']
-        }
-      ])
-    ]
+  configureWebpack() {
+    let config = {
+      plugins: [
+        /**
+         * 复制netmodular-ui/public目录下的文件到输出目录
+         */
+        new CopyWebpackPlugin([
+          {
+            from: path.join(__dirname, 'node_modules/netmodular-ui/public'),
+            to: path.join(__dirname, outputDir),
+            ignore: ['index.html']
+          }
+        ])
+      ]
+    }
+
+    if (!isDev) {
+      //自定义代码压缩
+      config.optimization = {
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            cache: true,
+            parallel: true,
+            sourceMap: false,
+            terserOptions: {
+              compress: {
+                drop_console: true,
+                drop_debugger: true
+              }
+            }
+          })
+        ]
+      }
+    }
+    return config
   },
   chainWebpack: config => {
     /**
@@ -56,20 +79,6 @@ module.exports = {
       )
       // 非开发环境
       .when(!isDev, config => {
-        config.optimization.minimizer([
-          new TerserPlugin({
-            cache: true,
-            parallel: true,
-            sourceMap: false, // Must be set to true if using source-maps in production
-            terserOptions: {
-              compress: {
-                drop_console: true,
-                drop_debugger: true
-              }
-            }
-          })
-        ])
-
         // 拆分
         config.optimization.splitChunks({
           chunks: 'all',

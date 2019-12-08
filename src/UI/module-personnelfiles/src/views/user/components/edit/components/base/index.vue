@@ -130,7 +130,10 @@ export default {
         },
         rules: {
           userName: [{ required: true, message: '请输入登录名', trigger: 'blur' }],
-          password: [{ required: true, message: '请输入密码', trigger: 'blur' }, { min: 6, max: 30, message: '密码长度不能小于6位获大于30位', trigger: 'blur' }],
+          password: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            { min: 6, max: 30, message: '密码长度不能小于6位获大于30位', trigger: 'blur' }
+          ],
           name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
           departmentId: [{ required: true, message: '请选择部门', trigger: 'blur' }],
           positionId: [{ required: true, message: '请选择岗位', trigger: 'blur' }],

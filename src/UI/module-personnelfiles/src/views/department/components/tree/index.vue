@@ -73,9 +73,7 @@ export default {
         children: []
       }
       if (model.children) {
-        model.children.map(item => [
-          node.children.push(this.model2Tree(item))
-        ])
+        model.children.map(item => [node.children.push(this.model2Tree(item))])
       }
       return node
     },
@@ -100,9 +98,15 @@ export default {
      * 获取节点的完整路径
      */
     getFullPath(node) {
-      if (node.parent === null || node.data.id === 0) { return '' }
+      if (node.parent === null || node.data.id === 0) {
+        return ''
+      }
       const parentPath = this.getFullPath(node.parent)
-      if (parentPath === '') { return node.data.label } else { return parentPath + ' / ' + node.data.label }
+      if (parentPath === '') {
+        return node.data.label
+      } else {
+        return parentPath + ' / ' + node.data.label
+      }
     },
     remove(id) {
       this.$refs.tree.remove(id)

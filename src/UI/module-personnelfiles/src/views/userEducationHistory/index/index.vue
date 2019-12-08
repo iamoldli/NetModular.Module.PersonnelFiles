@@ -13,10 +13,10 @@
         <nm-button type="success" text="添加" icon="add" @click="add" />
       </template>
 
-      <template v-slot:col-date="{row}">{{$dayjs(row.startDate).format('YYYY-MM')}} ~ {{$dayjs(row.endDate).format('YYYY-MM')}}</template>
+      <template v-slot:col-date="{ row }">{{ $dayjs(row.startDate).format('YYYY-MM') }} ~ {{ $dayjs(row.endDate).format('YYYY-MM') }}</template>
 
       <!--操作列-->
-      <template v-slot:col-operation="{row}">
+      <template v-slot:col-operation="{ row }">
         <nm-button text="编辑" icon="edit" type="text" @click="edit(row)" />
         <nm-button-delete :id="row.id" :action="removeAction" @success="refresh" />
       </template>

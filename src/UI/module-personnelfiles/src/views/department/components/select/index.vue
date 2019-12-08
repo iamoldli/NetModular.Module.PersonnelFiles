@@ -1,11 +1,11 @@
 <template>
   <div>
-    <el-input v-model="path_" @click.native="dialog.visible=true" readonly/>
+    <el-input v-model="path_" @click.native="dialog.visible = true" readonly />
     <nm-dialog v-bind="dialog" :visible.sync="dialog.visible">
-      <tree ref="tree" v-model="id" @change="onTreeChange"/>
+      <tree ref="tree" v-model="id" @change="onTreeChange" />
       <template v-slot:footer>
-        <nm-button type="success" text="确定" @click="onSuccess"/>
-        <nm-button type="info" text="取消" @click="dialog.visible = false"/>
+        <nm-button type="success" text="确定" @click="onSuccess" />
+        <nm-button type="info" text="取消" @click="dialog.visible = false" />
       </template>
     </nm-dialog>
   </div>

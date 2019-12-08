@@ -16,12 +16,12 @@
           </template>
 
           <!--按钮-->
-          <template v-slot:querybar-buttons="{total}">
+          <template v-slot:querybar-buttons="{ total }">
             <nm-button v-bind="buttons.add" @click="add(total)" />
           </template>
 
           <!--操作列-->
-          <template v-slot:col-operation="{row}">
+          <template v-slot:col-operation="{ row }">
             <nm-button v-bind="buttons.edit" @click="edit(row)" />
             <nm-button v-bind="buttons.position" @click="position(row)" />
             <nm-button-delete v-bind="buttons.del" :action="removeAction" :id="row.id" @success="onRemoveSuccess(row.id)" />

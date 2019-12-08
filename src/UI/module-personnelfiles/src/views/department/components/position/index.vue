@@ -14,7 +14,7 @@
       </template>
 
       <!--操作列-->
-      <template v-slot:col-operation="{row}">
+      <template v-slot:col-operation="{ row }">
         <nm-button v-bind="buttons.positionEdit" @click="edit(row)" />
         <nm-button-delete v-bind="buttons.positionDel" :action="removeAction" :id="row.id" @success="refresh" />
       </template>
