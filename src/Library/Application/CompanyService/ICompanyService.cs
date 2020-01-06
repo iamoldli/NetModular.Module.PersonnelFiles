@@ -1,55 +1,24 @@
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using NetModular.Lib.Utils.Core.Result;
-using NetModular.Module.PersonnelFiles.Application.CompanyService.ViewModels;
-using NetModular.Module.PersonnelFiles.Domain.Company.Models;
+using NetModular.Module.PersonnelFiles.Infrastructure;
 
 namespace NetModular.Module.PersonnelFiles.Application.CompanyService
 {
     /// <summary>
-    /// 公司单位服务
+    /// 公司单位
     /// </summary>
     public interface ICompanyService
     {
         /// <summary>
-        /// 查询
+        /// 获取单位信息
         /// </summary>
-        /// <param name="model"></param>
         /// <returns></returns>
-        Task<IResultModel> Query(CompanyQueryModel model);
+        Task<IResultModel> Get();
 
         /// <summary>
-        /// 创建
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        Task<IResultModel> Add(CompanyAddModel model);
-
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="id">编号</param>
-        /// <returns></returns>
-        Task<IResultModel> Delete(Guid id);
-
-        /// <summary>
-        /// 编辑
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<IResultModel> Edit(Guid id);
-
-        /// <summary>
-        /// 修改
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        Task<IResultModel> Update(CompanyUpdateModel model);
-
-        /// <summary>
-        /// 下拉列表
+        /// 更新
         /// </summary>
         /// <returns></returns>
-        Task<IResultModel> Select();
+        Task<IResultModel> Update(CompanyInfo model);
     }
 }

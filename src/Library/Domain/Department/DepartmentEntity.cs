@@ -11,9 +11,9 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
     public partial class DepartmentEntity : EntityBase
     {
         /// <summary>
-        /// 公司编号
+        /// 父级ID
         /// </summary>
-        public Guid CompanyId { get; set; }
+        public Guid ParentId { get; set; }
 
         /// <summary>
         /// 名称
@@ -22,12 +22,7 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
         public string Name { get; set; }
 
         /// <summary>
-        /// 父节点
-        /// </summary>
-        public Guid ParentId { get; set; }
-
-        /// <summary>
-        /// 负责人
+        /// 负责人ID
         /// </summary>
         public Guid Leader { get; set; }
 
@@ -35,5 +30,10 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
         /// 排序
         /// </summary>
         public int Sort { get; set; }
+
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public int Level { get; set; }
     }
 }

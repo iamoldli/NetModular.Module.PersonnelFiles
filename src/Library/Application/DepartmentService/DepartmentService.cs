@@ -19,14 +19,12 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
         private readonly IMapper _mapper;
         private readonly IDepartmentRepository _repository;
         private readonly IUserRepository _userRepository;
-        private readonly ICompanyRepository _companyRepository;
 
         public DepartmentService(IMapper mapper, IDepartmentRepository repository, IUserRepository userRepository, ICompanyRepository companyRepository)
         {
             _mapper = mapper;
             _repository = repository;
             _userRepository = userRepository;
-            _companyRepository = companyRepository;
         }
 
         public async Task<IResultModel> GetTree(Guid companyId)
@@ -110,7 +108,7 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
                 return ResultModel.NotExists;
 
             var model = _mapper.Map<DepartmentUpdateModel>(entity);
-            if (model.Leader.NotEmpty())
+            if (model.Leader != null)
             {
                 var leader = await _userRepository.GetAsync(model.Leader);
                 if (leader != null)
@@ -153,11 +151,11 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
             }
             else
             {
-                var company = await _companyRepository.GetAsync(entity.CompanyId);
-                if (company != null)
-                {
-                    path = company.Name + " / " + path;
-                }
+                //var company = await _companyRepository.GetAsync(entity.CompanyId);
+                //if (company != null)
+                //{
+                //    path = company.Name + " / " + path;
+                //}
             }
 
             return path;

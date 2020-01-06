@@ -8,11 +8,6 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewMod
     public class DepartmentAddModel
     {
         /// <summary>
-        /// 公司编号
-        /// </summary>
-        public Guid CompanyId { get; set; }
-
-        /// <summary>
         /// 父节点
         /// </summary>
         public Guid? ParentId { get; set; }
@@ -31,6 +26,5 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewMod
         /// 排序
         /// </summary>
         public int Sort { get; set; }
-
     }
 }

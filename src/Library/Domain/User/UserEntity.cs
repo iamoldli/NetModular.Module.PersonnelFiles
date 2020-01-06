@@ -1,6 +1,7 @@
 using System;
 using NetModular.Lib.Data.Abstractions.Attributes;
 using NetModular.Lib.Data.Core.Entities.Extend;
+using NetModular.Lib.Utils.Core.Enums;
 
 namespace NetModular.Module.PersonnelFiles.Domain.User
 {
@@ -74,7 +75,7 @@ namespace NetModular.Module.PersonnelFiles.Domain.User
         /// 身份证号
         /// </summary>
         [Nullable]
-        public string IdCardNo { get; set; }
+        public string IdCard { get; set; }
 
         /// <summary>
         /// 手机号
@@ -87,5 +88,10 @@ namespace NetModular.Module.PersonnelFiles.Domain.User
         [Length(250)]
         [Nullable]
         public string Email { get; set; }
+
+        /// <summary>
+        /// 入职时间
+        /// </summary>
+        public DateTime JoinTime { get; set; }
     }
 }

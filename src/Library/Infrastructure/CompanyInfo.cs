@@ -1,19 +1,14 @@
-namespace NetModular.Module.PersonnelFiles.Application.CompanyService.ViewModels
+﻿namespace NetModular.Module.PersonnelFiles.Infrastructure
 {
     /// <summary>
-    /// 公司单位添加模型
+    /// 单位信息，存储到配置项中
     /// </summary>
-    public class CompanyAddModel
+    public class CompanyInfo
     {
         /// <summary>
         /// 名称
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 联系电话
-        /// </summary>
-        public string Phone { get; set; }
 
         /// <summary>
         /// 地址
@@ -26,9 +21,13 @@ namespace NetModular.Module.PersonnelFiles.Application.CompanyService.ViewModels
         public string Contact { get; set; }
 
         /// <summary>
+        /// 联系电话
+        /// </summary>
+        public string Phone { get; set; }
+
+        /// <summary>
         /// 传真
         /// </summary>
         public string Fax { get; set; }
-
     }
 }

@@ -1,89 +1,28 @@
-using System;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using NetModular.Lib.Utils.Core.Result;
-using NetModular.Module.PersonnelFiles.Application.CompanyService.ViewModels;
-using NetModular.Module.PersonnelFiles.Domain.Company;
-using NetModular.Module.PersonnelFiles.Domain.Company.Models;
+using NetModular.Module.Admin.Domain.Config;
+using NetModular.Module.PersonnelFiles.Infrastructure;
 
 namespace NetModular.Module.PersonnelFiles.Application.CompanyService
 {
     public class CompanyService : ICompanyService
     {
-        private readonly IMapper _mapper;
-        private readonly ICompanyRepository _repository;
-        public CompanyService(IMapper mapper, ICompanyRepository repository)
+        private readonly IConfigRepository _configRepository;
+
+        public CompanyService(IConfigRepository configRepository)
         {
-            _mapper = mapper;
-            _repository = repository;
+            _configRepository = configRepository;
         }
 
-        public async Task<IResultModel> Query(CompanyQueryModel model)
+        public Task<IResultModel> Get()
         {
-            var result = new QueryResultModel<CompanyEntity>
-            {
-                Rows = await _repository.Query(model),
-                Total = model.TotalCount
-            };
-            return ResultModel.Success(result);
+            throw new NotImplementedException();
         }
 
-        public async Task<IResultModel> Add(CompanyAddModel model)
+        public Task<IResultModel> Update(CompanyInfo model)
         {
-            var entity = _mapper.Map<CompanyEntity>(model);
-            //if (await _repository.Exists(entity))
-            //{
-                //return ResultModel.HasExists;
-            //}
-
-            var result = await _repository.AddAsync(entity);
-            return ResultModel.Result(result);
-        }
-
-        public async Task<IResultModel> Delete(Guid id)
-        {
-            var result = await _repository.DeleteAsync(id);
-            return ResultModel.Result(result);
-        }
-
-        public async Task<IResultModel> Edit(Guid id)
-        {
-            var entity = await _repository.GetAsync(id);
-            if (entity == null)
-                return ResultModel.NotExists;
-
-            var model = _mapper.Map<CompanyUpdateModel>(entity);
-            return ResultModel.Success(model);
-        }
-
-        public async Task<IResultModel> Update(CompanyUpdateModel model)
-        {
-            var entity = await _repository.GetAsync(model.Id);
-            if (entity == null)
-                return ResultModel.NotExists;
-
-            _mapper.Map(model, entity);
-
-            //if (await _repository.Exists(entity))
-            //{
-                //return ResultModel.HasExists;
-            //}
-
-            var result = await _repository.UpdateAsync(entity);
-
-            return ResultModel.Result(result);
-        }
-
-        public async Task<IResultModel> Select()
-        {
-            var all = await _repository.GetAllAsync();
-            var list = all.Select(m => new OptionResultModel
-            {
-                Label = m.Name,
-                Value = m.Id
-            }).ToList();
-            return ResultModel.Success(list);
+            throw new NotImplementedException();
         }
     }
 }
