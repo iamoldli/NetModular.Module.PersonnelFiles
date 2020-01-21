@@ -36,5 +36,9 @@ namespace NetModular.Module.PersonnelFiles.Domain.Company
         /// </summary>
         public string Fax { get; set; }
 
+        /// <summary>
+        /// 是否激活
+        /// </summary>
+        public bool Active { get; set; }
     }
 }

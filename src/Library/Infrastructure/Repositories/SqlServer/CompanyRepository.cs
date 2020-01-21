@@ -38,5 +38,10 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
 
             return result;
         }
+
+        public Task<CompanyEntity> GetActive()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

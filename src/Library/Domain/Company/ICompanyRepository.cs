@@ -16,5 +16,11 @@ namespace NetModular.Module.PersonnelFiles.Domain.Company
         /// <param name="model"></param>
         /// <returns></returns>
         Task<IList<CompanyEntity>> Query(CompanyQueryModel model);
+
+        /// <summary>
+        /// 查询激活的公司单位
+        /// </summary>
+        /// <returns></returns>
+        Task<CompanyEntity> GetActive();
     }
 }
