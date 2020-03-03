@@ -2,9 +2,9 @@
   <PropertyGroup>
     <Id>PersonnelFiles</Id>
     <Name>人事档案</Name>
-    <Authors>Oldli</Authors>
     <Icon>personnel-files</Icon>
-    <Version>1.5.1</Version>
+    <Authors>Oldli</Authors>
+    <Version>1.5.2</Version>
     <Description>NetModular Module $(Id)($(Name)) - $(MSBuildProjectName)</Description>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <LangVersion>Latest</LangVersion>
@@ -17,7 +17,8 @@
     <PackageOutputPath>$(SolutionDir)\_packages</PackageOutputPath>
     <Company>Oldli</Company>
     <Copyright>Oldli</Copyright>
-    <PackageProjectUrl>https://nm.iamoldli.com/docs/</PackageProjectUrl>
+    <PackageProjectUrl>https://docs.17mkh.com/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/iamoldli/NetModular.Module.PersonnelFiles</RepositoryUrl>
   </PropertyGroup>
 </Project>
+
