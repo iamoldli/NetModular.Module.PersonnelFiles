@@ -60,7 +60,8 @@ export default {
     }
   },
   props: {
-    id: Number
+    id: Number,
+    readonly_: Boolean
   },
   methods: {
     query() {
@@ -71,9 +72,10 @@ export default {
     }
   },
   watch: {
-    readonly: {
+    readonly_: {
       immediate: true,
       handler(val) {
+        console.log(val)
         this.list.noQuerybar = val
         this.list.noOperation = val
       }

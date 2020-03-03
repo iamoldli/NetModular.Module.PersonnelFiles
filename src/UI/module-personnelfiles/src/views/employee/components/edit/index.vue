@@ -16,15 +16,15 @@
         </el-tab-pane>
         <el-tab-pane name="family" lazy>
           <span slot="label"> <nm-icon name="family" />家庭情况 </span>
-          <family-page ref="family" :id="id_" :readonly="readonly" />
+          <family-page ref="family" :id="id_" :readonly_="readonly" />
         </el-tab-pane>
         <el-tab-pane name="education" lazy>
           <span slot="label"> <nm-icon name="education" />教育背景 </span>
-          <education-page ref="education" :id="id_" :readonly="readonly" />
+          <education-page ref="education" :id="id_" :readonly_="readonly" />
         </el-tab-pane>
         <el-tab-pane name="work" lazy>
           <span slot="label"> <nm-icon name="work" />工作经历 </span>
-          <work-page ref="work" :id="id_" :readonly="readonly" />
+          <work-page ref="work" :id="id_" :readonly_="readonly" />
         </el-tab-pane>
         <el-tab-pane name="account" lazy>
           <span slot="label"> <nm-icon name="verifycode" />账户信息 </span>

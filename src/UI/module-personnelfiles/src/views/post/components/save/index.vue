@@ -48,7 +48,10 @@ export default {
           /** 备注 */
           remarks: ''
         },
-        rules: {}
+        rules: {
+          positionId: [{ required: true, message: '请选择职位', trigger: 'blur' }],
+          name: [{ required: true, message: '请输入名称', trigger: 'blur' }]
+        }
       }
     }
   }
