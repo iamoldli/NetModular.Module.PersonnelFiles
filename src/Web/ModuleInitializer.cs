@@ -1,12 +1,8 @@
 using Microsoft.AspNetCore.Builder;
-#if NETSTANDARD2_0
-using Microsoft.AspNetCore.Hosting;
-#endif
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-#if NETCOREAPP3_1
 using Microsoft.Extensions.Hosting;
-#endif
+using NetModular.Lib.Module.Abstractions;
 using NetModular.Lib.Module.AspNetCore;
 
 namespace NetModular.Module.PersonnelFiles.Web
@@ -17,12 +13,9 @@ namespace NetModular.Module.PersonnelFiles.Web
         /// 注入服务
         /// </summary>
         /// <param name="services"></param>
+        /// <param name="modules"></param>
         /// <param name="env"></param>
-#if NETSTANDARD2_0
-        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env)
-#elif NETCOREAPP3_1
-        public void ConfigureServices(IServiceCollection services, IHostEnvironment env)
-#endif
+        public void ConfigureServices(IServiceCollection services, IModuleCollection modules, IHostEnvironment env)
         {
         }
 
@@ -31,11 +24,7 @@ namespace NetModular.Module.PersonnelFiles.Web
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-#if NETSTANDARD2_0
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-#elif NETCOREAPP3_1
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
-#endif
         {
         }
 
@@ -45,7 +34,6 @@ namespace NetModular.Module.PersonnelFiles.Web
         /// <param name="mvcOptions"></param>
         public void ConfigureMvc(MvcOptions mvcOptions)
         {
-
         }
     }
 }

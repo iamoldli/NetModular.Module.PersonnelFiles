@@ -1,10 +1,29 @@
 /** 页面信息 */
 const page = new (function() {
-  this.title = '岗位列表'
-  this.icon = 'post'
+  this.title = '职位管理'
+  this.icon = 'position'
   this.name = 'personnelfiles_position'
   this.path = '/personnelfiles/position'
+
+  // 关联权限
+  this.permissions = [`${this.name}_query_get`]
+
+  // 按钮
   this.buttons = {
+    add: {
+      text: '添加',
+      type: 'success',
+      icon: 'add',
+      code: `${this.name}_add`,
+      permissions: [`${this.name}_add_post`]
+    },
+    edit: {
+      text: '编辑',
+      type: 'text',
+      icon: 'edit',
+      code: `${this.name}_edit`,
+      permissions: [`${this.name}_edit_get`, `${this.name}_update_post`]
+    },
     del: {
       text: '删除',
       type: 'text',

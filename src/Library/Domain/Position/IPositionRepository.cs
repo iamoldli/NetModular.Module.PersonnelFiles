@@ -19,17 +19,19 @@ namespace NetModular.Module.PersonnelFiles.Domain.Position
         Task<IList<PositionEntity>> Query(PositionQueryModel model);
 
         /// <summary>
-        /// 是否存在
+        /// 名称是否存在
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> Exists(PositionEntity entity);
+        Task<bool> ExistsName(string name, int? id = null);
 
         /// <summary>
-        /// 查询指定部门的岗位列表
+        /// 编码是否存在
         /// </summary>
-        /// <param name="departmentId"></param>
+        /// <param name="code"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task<IList<PositionEntity>> QueryByDepartment(Guid departmentId);
+        Task<bool> ExistsCode(string code, int? id = null);
     }
 }

@@ -1,15 +1,9 @@
-using System;
-using  NetModular.Lib.Data.Query;
+using NetModular.Lib.Data.Query;
 
-namespace  NetModular.Module.PersonnelFiles.Domain.Position.Models
+namespace NetModular.Module.PersonnelFiles.Domain.Position.Models
 {
     public class PositionQueryModel : QueryModel
     {
-        /// <summary>
-        /// 部门编码
-        /// </summary>
-        public Guid DepartmentId { get; set; }
-
         /// <summary>
         /// 名称
         /// </summary>

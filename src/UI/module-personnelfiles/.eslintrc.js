@@ -13,6 +13,7 @@ module.exports = {
   },
   globals: {
     $http: 'readonly',
-    $api: 'readonly'
+    $api: 'readonly',
+    $const: 'readonly'
   }
 }

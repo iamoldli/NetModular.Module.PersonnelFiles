@@ -19,18 +19,21 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
         Task<IList<DepartmentEntity>> Query(DepartmentQueryModel model);
 
         /// <summary>
-        /// 查询某公司下的所有部门列表
+        /// 同一层级中名称是否存在
         /// </summary>
-        /// <param name="companyId"></param>
+        /// <param name="name"></param>
+        /// <param name="parentId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task<IList<DepartmentEntity>> QueryAllByCompany(Guid companyId);
+        Task<bool> ExistsName(string name,Guid parentId, Guid? id = null);
 
         /// <summary>
-        /// 是否存在
+        /// 编码是否存在
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="code"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> Exists(DepartmentEntity entity);
+        Task<bool> ExistsCode(string code, Guid? id = null);
 
         /// <summary>
         /// 判断是否存在子部门

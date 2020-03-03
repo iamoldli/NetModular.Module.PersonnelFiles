@@ -22,14 +22,14 @@ namespace NetModular.Module.PersonnelFiles.Web.Controllers
 
         [HttpGet]
         [Description("部门树")]
-        public async Task<IResultModel> Tree([BindRequired] Guid companyId)
+        public Task<IResultModel> Tree()
         {
-            return await _service.GetTree(companyId);
+            return _service.GetTree();
         }
 
         [HttpGet]
         [Description("查询")]
-        public Task<IResultModel> Query([FromQuery] DepartmentQueryModel model)
+        public Task<IResultModel> Query([FromQuery]DepartmentQueryModel model)
         {
             return _service.Query(model);
         }
@@ -43,16 +43,16 @@ namespace NetModular.Module.PersonnelFiles.Web.Controllers
 
         [HttpDelete]
         [Description("删除")]
-        public async Task<IResultModel> Delete([BindRequired] Guid id)
+        public Task<IResultModel> Delete([BindRequired]Guid id)
         {
-            return await _service.Delete(id);
+            return _service.Delete(id);
         }
 
         [HttpGet]
         [Description("编辑")]
-        public async Task<IResultModel> Edit([BindRequired] Guid id)
+        public Task<IResultModel> Edit([BindRequired]Guid id)
         {
-            return await _service.Edit(id);
+            return _service.Edit(id);
         }
 
         [HttpPost]

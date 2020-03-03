@@ -8,7 +8,6 @@ using NetModular.Lib.Data.Query;
 using NetModular.Module.Admin.Domain.Account;
 using NetModular.Module.PersonnelFiles.Domain.Department;
 using NetModular.Module.PersonnelFiles.Domain.Department.Models;
-using NetModular.Module.PersonnelFiles.Domain.User;
 
 namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
 {
@@ -22,21 +21,19 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
         {
             var paging = model.Paging();
 
-            var query = Db.Find(m => m.CompanyId == model.CompanyId);
+            var query = Db.Find(m => m.ParentId == model.ParentId);
 
-            var parentId = model.ParentId ?? Guid.Empty;
-            query.Where(m => m.ParentId == parentId);
             query.WhereNotNull(model.Name, m => m.Name.Contains(model.Name));
+            query.WhereNotNull(model.Code, m => m.Code == model.Code);
 
-            var joinQuery = query.LeftJoin<UserEntity>((x, y) => x.Leader == y.Id)
-                .LeftJoin<AccountEntity>((x, y, z) => x.CreatedBy == z.Id);
+            var joinQuery = query.LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id);
 
             if (!paging.OrderBy.Any())
             {
-                joinQuery.OrderBy((x, y, z) => x.Sort);
+                joinQuery.OrderBy((x, y) => x.Sort);
             }
 
-            joinQuery.Select((x, y, z) => new { x, LeaderName = y.Name, Creator = z.Name });
+            joinQuery.Select((x, y) => new { x, Creator = y.Name });
 
             var result = await joinQuery.PaginationAsync(paging);
             model.TotalCount = paging.TotalCount;
@@ -44,17 +41,18 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
             return result;
         }
 
-        public Task<IList<DepartmentEntity>> QueryAllByCompany(Guid companyId)
+        public Task<bool> ExistsName(string name, Guid parentId, Guid? id = null)
         {
-            return Db.Find(m => m.CompanyId == companyId).ToListAsync();
+            var query = Db.Find(m => m.Name == name && m.ParentId == parentId);
+            query.WhereNotNull(id, m => m.Id != id.Value);
+
+            return query.ExistsAsync();
         }
 
-        public Task<bool> Exists(DepartmentEntity entity)
+        public Task<bool> ExistsCode(string code, Guid? id = null)
         {
-            var query = Db.Find(m => m.Name == entity.Name && m.ParentId == entity.ParentId);
-            query.WhereNotEmpty(entity.ParentId, m => m.CompanyId == entity.CompanyId);
-            query.WhereNotEmpty(entity.Id, m => m.Id != entity.Id);
-
+            var query = Db.Find(m => m.Code == code);
+            query.WhereNotNull(id, m => m.Id != id.Value);
             return query.ExistsAsync();
         }
 

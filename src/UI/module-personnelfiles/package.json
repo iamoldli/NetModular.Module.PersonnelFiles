@@ -1,6 +1,6 @@
 {
     "name": "netmodular-module-personnelfiles",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "code": "personnelFiles",
     "title": "人事档案",
     "description": "人事档案",
@@ -17,24 +17,25 @@
         "pub": "cd ../../../script && npm_publish.ps1"
     },
     "dependencies": {
-        "netmodular-module-admin": "^1.0.1",
-        "netmodular-module-common": "^1.0.1"
+        "netmodular-module-admin": "^1.2.6",
+        "netmodular-module-common": "^1.1.4",
+        "netmodular-ui": "^1.5.9"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "^4.1.1",
-        "@vue/cli-plugin-eslint": "^4.1.1",
-        "@vue/cli-plugin-router": "^4.1.1",
-        "@vue/cli-plugin-vuex": "^4.1.1",
-        "@vue/cli-service": "^4.1.1",
+        "@vue/cli-plugin-babel": "^4.2.3",
+        "@vue/cli-plugin-eslint": "^4.2.3",
+        "@vue/cli-plugin-router": "^4.2.3",
+        "@vue/cli-plugin-vuex": "^4.2.3",
+        "@vue/cli-service": "^4.2.3",
         "@vue/eslint-config-prettier": "^5.0.0",
-        "babel-eslint": "^10.0.3",
+        "babel-eslint": "^10.1.0",
         "eslint": "^5.16.0",
         "eslint-plugin-prettier": "^3.1.1",
         "eslint-plugin-vue": "^5.0.0",
         "prettier": "^1.18.2",
         "raw-loader": "^3.1.0",
         "rimraf": "^3.0.0",
-        "sass": "^1.22.10",
+        "sass": "^1.26.2",
         "sass-loader": "^8.0.0",
         "vue-template-compiler": "^2.6.10"
     }

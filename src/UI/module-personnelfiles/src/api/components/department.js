@@ -11,8 +11,8 @@ export default name => {
    * 获取部门树
    * @param {公司编号} companyId
    */
-  const getTree = companyId => {
-    return $http.get(urls.tree, { companyId })
+  const getTree = () => {
+    return $http.get(urls.tree)
   }
 
   return {

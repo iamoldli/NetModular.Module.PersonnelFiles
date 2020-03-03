@@ -8,7 +8,7 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
     /// 部门
     /// </summary>
     [Table("Department")]
-    public partial class DepartmentEntity : EntityBase
+    public class DepartmentEntity : EntityBase
     {
         /// <summary>
         /// 父级ID
@@ -22,9 +22,15 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
         public string Name { get; set; }
 
         /// <summary>
-        /// 负责人ID
+        /// 唯一编码
         /// </summary>
-        public Guid Leader { get; set; }
+        [Nullable]
+        public string Code { get; set; }
+
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public int Level { get; set; }
 
         /// <summary>
         /// 排序
@@ -32,8 +38,8 @@ namespace NetModular.Module.PersonnelFiles.Domain.Department
         public int Sort { get; set; }
 
         /// <summary>
-        /// 等级
+        /// 完整路径
         /// </summary>
-        public int Level { get; set; }
+        public string FullPath { get; set; }
     }
 }

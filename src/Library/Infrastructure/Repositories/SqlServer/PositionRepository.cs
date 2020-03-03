@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 using NetModular.Lib.Data.Abstractions;
 using NetModular.Lib.Data.Core;
 using NetModular.Lib.Data.Query;
-using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Module.Admin.Domain.Account;
-using NetModular.Module.PersonnelFiles.Domain.Company;
-using NetModular.Module.PersonnelFiles.Domain.Department;
 using NetModular.Module.PersonnelFiles.Domain.Position;
 using NetModular.Module.PersonnelFiles.Domain.Position.Models;
 
@@ -25,20 +22,17 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
             var paging = model.Paging();
 
             var query = Db.Find();
-            query.WhereNotEmpty(model.DepartmentId, m => m.DepartmentId == model.DepartmentId);
             query.WhereNotNull(model.Name, m => m.Name.Contains(m.Name));
             query.WhereNotNull(model.Code, m => m.Code == model.Code);
 
-            var joinQuery = query.LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id)
-                .LeftJoin<DepartmentEntity>((x, y, z) => x.DepartmentId == z.Id)
-                .LeftJoin<CompanyEntity>((x, y, z, m) => z.CompanyId == m.Id);
+            var joinQuery = query.LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id);
 
             if (!paging.OrderBy.Any())
             {
-                joinQuery.OrderByDescending((x, y, z, m) => x.Id);
+                joinQuery.OrderByDescending((x, y) => x.Id);
             }
 
-            joinQuery.Select((x, y, z, m) => new { x, DepartmentName = z.Name, CompanyName = m.Name, Creator = y.Name });
+            joinQuery.Select((x, y) => new { x, Creator = y.Name });
 
             var result = await joinQuery.PaginationAsync(paging);
             model.TotalCount = paging.TotalCount;
@@ -46,27 +40,18 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
             return result;
         }
 
-        public Task<bool> Exists(PositionEntity entity)
+        public Task<bool> ExistsName(string name, int? id = null)
         {
-            var query = Db.Find(m => m.DepartmentId == entity.DepartmentId);
-
-            if (entity.Code.NotNull())
-            {
-                query.Where(m => m.Name == entity.Name || m.Code == entity.Code);
-            }
-            else
-            {
-                query.Where(m => m.Name == entity.Name);
-            }
-
-            query.WhereNotEmpty(entity.Id, m => m.Id != entity.Id);
-
+            var query = Db.Find(m => m.Name == name);
+            query.WhereNotNull(id, m => m.Id != id.Value);
             return query.ExistsAsync();
         }
 
-        public Task<IList<PositionEntity>> QueryByDepartment(Guid departmentId)
+        public Task<bool> ExistsCode(string code, int? id = null)
         {
-            return Db.Find(m => m.DepartmentId == departmentId).ToListAsync();
+            var query = Db.Find(m => m.Code == code);
+            query.WhereNotNull(id, m => m.Id != id.Value);
+            return query.ExistsAsync();
         }
     }
 }

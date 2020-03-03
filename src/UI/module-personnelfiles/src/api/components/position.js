@@ -4,15 +4,15 @@ export default name => {
   const root = `${module.code}/${name}/`
   const crud = $http.crud(root)
   const urls = {
-    select: root + 'Select'
+    get: root + 'Get'
   }
 
-  const select = departmentId => {
-    return $http.get(urls.select, { departmentId })
+  const get = id => {
+    return $http.get(urls.get, { id })
   }
 
   return {
     ...crud,
-    select
+    get
   }
 }

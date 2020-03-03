@@ -12,11 +12,10 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
     public interface IDepartmentService
     {
         /// <summary>
-        /// 查询指定公司的部门树
+        /// 查询部门树
         /// </summary>
-        /// <param name="companyId">公司编号</param>
         /// <returns></returns>
-        Task<IResultModel> GetTree(Guid companyId);
+        Task<IResultModel> GetTree();
 
         /// <summary>
         /// 查询
@@ -52,11 +51,5 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
         /// <param name="model"></param>
         /// <returns></returns>
         Task<IResultModel> Update(DepartmentUpdateModel model);
-
-        /// <summary>
-        /// 获取部门的完整路径
-        /// </summary>
-        /// <returns></returns>
-        Task<string> GetFullPath(Guid id);
     }
 }

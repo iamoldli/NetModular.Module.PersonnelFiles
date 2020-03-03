@@ -1,25 +1,18 @@
 # NetModular 人事档案模块
 
-# 此模块暂时不在维护~
+该仓储是基于[NetModular](https://github.com/iamoldli/NetModular)框架开发的人事档案模块，主要包括组织机构以及人员档案的管理
 
+## 数据字典
 
-该仓储是基于[NetModular](https://github.com/iamoldli/NetModular)框架开发的人事档案模块
+| 名称     | 分组           | 编码              |
+| -------- | -------------- | ----------------- |
+| 学历     | PersonnelFiles | EducationLevel    |
+| 离职类型 | PersonnelFiles | EmployeeLeaveType |
 
-### 本模块功能较简单，仅供学习参考，如若要在正式项目使用，请慎重~
+## 前端全局组件
 
-# 启动方式
+> 部门选择器(nm-department-select)
 
-进入 UI 目录，执行以下命令
+> 岗位选择器(nm-post-select)
 
-```
-npm install #安装包
-npm run build #打包
-```
-
-在 VS 中启动 WebHost 或者进入 WebHost 目录执行以下命令
-
-```
-dotnet watch run
-```
-
-打开 [http://localhost:6224](http://localhost:6224)，输入账户密码 admin/admin
+> 人员选择器(nm-employee-select)

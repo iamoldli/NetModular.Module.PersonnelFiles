@@ -6,12 +6,16 @@ export default [
     show: false
   },
   {
-    name: 'departmentName',
-    label: '部门'
-  },
-  {
     name: 'name',
     label: '名称'
+  },
+  {
+    name: 'shortName',
+    label: '简称'
+  },
+  {
+    name: 'code',
+    label: '编码'
   },
   {
     name: 'creator',

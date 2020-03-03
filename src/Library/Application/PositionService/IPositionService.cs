@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
@@ -30,14 +29,14 @@ namespace NetModular.Module.PersonnelFiles.Application.PositionService
         /// </summary>
         /// <param name="id">编号</param>
         /// <returns></returns>
-        Task<IResultModel> Delete(Guid id);
+        Task<IResultModel> Delete(int id);
 
         /// <summary>
         /// 编辑
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<IResultModel> Edit(Guid id);
+        Task<IResultModel> Edit(int id);
 
         /// <summary>
         /// 修改
@@ -47,10 +46,10 @@ namespace NetModular.Module.PersonnelFiles.Application.PositionService
         Task<IResultModel> Update(PositionUpdateModel model);
 
         /// <summary>
-        /// 查询指定部门下的岗位列表
+        /// 获取单个
         /// </summary>
-        /// <param name="departmentId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task<IResultModel> Select(Guid departmentId);
+        Task<IResultModel> Get(int id);
     }
 }

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using NetModular.Lib.Cache.Abstractions;
 using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.DepartmentService.ResultModels;
 using NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewModels;
-using NetModular.Module.PersonnelFiles.Domain.Company;
 using NetModular.Module.PersonnelFiles.Domain.Department;
 using NetModular.Module.PersonnelFiles.Domain.Department.Models;
-using NetModular.Module.PersonnelFiles.Domain.User;
+using NetModular.Module.PersonnelFiles.Domain.Employee;
+using NetModular.Module.PersonnelFiles.Infrastructure;
 
 namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
 {
@@ -18,44 +19,40 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
     {
         private readonly IMapper _mapper;
         private readonly IDepartmentRepository _repository;
-        private readonly IUserRepository _userRepository;
+        private readonly IEmployeeRepository _userRepository;
+        private readonly ICacheHandler _cacheHandler;
 
-        public DepartmentService(IMapper mapper, IDepartmentRepository repository, IUserRepository userRepository, ICompanyRepository companyRepository)
+        public DepartmentService(IMapper mapper, IDepartmentRepository repository, IEmployeeRepository userRepository, ICacheHandler cacheHandler)
         {
             _mapper = mapper;
             _repository = repository;
             _userRepository = userRepository;
+            _cacheHandler = cacheHandler;
         }
 
-        public async Task<IResultModel> GetTree(Guid companyId)
+        public async Task<IResultModel> GetTree()
         {
-            var list = new List<DepartmentTreeResultModel>();
+            if (_cacheHandler.TryGetValue(CacheKeys.DepartmentTree, out List<TreeResultModel<Guid, DepartmentTreeResultModel>> list))
+                return ResultModel.Success(list);
 
-            var all = await _repository.QueryAllByCompany(companyId);
-            foreach (var entity in all.Where(m => m.ParentId == Guid.Empty).OrderBy(m => m.Sort))
-            {
-                list.Add(Entity2Tree(entity, all));
-            }
+            var all = await _repository.GetAllAsync();
+            list = ResolveTree(all, Guid.Empty);
+
+            await _cacheHandler.SetAsync(CacheKeys.DepartmentTree, list);
 
             return ResultModel.Success(list);
         }
 
-        private DepartmentTreeResultModel Entity2Tree(DepartmentEntity entity, IList<DepartmentEntity> all)
+        private List<TreeResultModel<Guid, DepartmentTreeResultModel>> ResolveTree(IList<DepartmentEntity> all, Guid parentId)
         {
-            var model = new DepartmentTreeResultModel
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Sort = entity.Sort
-            };
-
-            var children = all.Where(m => m.ParentId == model.Id).OrderBy(m => m.Sort);
-            foreach (var child in children)
-            {
-                model.Children.Add(Entity2Tree(child, all));
-            }
-
-            return model;
+            return all.Where(m => m.ParentId == parentId).OrderBy(m => m.Sort)
+                .Select(m => new TreeResultModel<Guid, DepartmentTreeResultModel>
+                {
+                    Id = m.Id,
+                    Label = m.Name,
+                    Item = _mapper.Map<DepartmentTreeResultModel>(m),
+                    Children = ResolveTree(all, m.Id)
+                }).ToList();
         }
 
         public async Task<IResultModel> Query(DepartmentQueryModel model)
@@ -70,16 +67,35 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
 
         public async Task<IResultModel> Add(DepartmentAddModel model)
         {
-            var entity = _mapper.Map<DepartmentEntity>(model);
-            if (await _repository.Exists(entity))
+            if (await _repository.ExistsName(model.Name, model.ParentId))
             {
-                return ResultModel.HasExists;
+                return ResultModel.Failed("所属部门中已存在名称相同的部门");
+            }
+            if (model.Code.NotNull() && await _repository.ExistsCode(model.Code))
+            {
+                return ResultModel.Failed("编码已存在");
+            }
+
+            var entity = _mapper.Map<DepartmentEntity>(model);
+            entity.FullPath = $"/{entity.Name}";
+            //查询父级
+            if (model.ParentId.NotEmpty())
+            {
+                var parent = await _repository.GetAsync(model.ParentId);
+                if (parent != null)
+                {
+                    //设置等级
+                    entity.Level = parent.Level++;
+                    //设置完整路径
+                    entity.FullPath = $"{parent.FullPath}/{entity.Name}";
+                }
             }
 
             var result = await _repository.AddAsync(entity);
             if (result)
             {
-                return ResultModel.Success(entity.Id);
+                await ClearCache();
+                return ResultModel.Success(entity);
             }
 
             return ResultModel.Failed();
@@ -89,15 +105,19 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
         {
             if (await _repository.ExistsChildren(id))
             {
-                return ResultModel.Failed("����ɾ���Ӳ���");
+                return ResultModel.Failed("当前部门包含子部门，请先删除子部门");
             }
 
             if (await _userRepository.ExistsBindDept(id))
             {
-                return ResultModel.Failed("����Ա���˸ò��ţ��޷�ɾ��");
+                return ResultModel.Failed("当前部门包含用户，请先删除用户");
             }
 
             var result = await _repository.DeleteAsync(id);
+            if (result)
+            {
+                await ClearCache();
+            }
             return ResultModel.Result(result);
         }
 
@@ -108,14 +128,6 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
                 return ResultModel.NotExists;
 
             var model = _mapper.Map<DepartmentUpdateModel>(entity);
-            if (model.Leader != null)
-            {
-                var leader = await _userRepository.GetAsync(model.Leader);
-                if (leader != null)
-                {
-                    model.LeaderName = leader.Name;
-                }
-            }
             return ResultModel.Success(model);
         }
 
@@ -127,38 +139,44 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
 
             _mapper.Map(model, entity);
 
-            if (await _repository.Exists(entity))
+            if (await _repository.ExistsName(entity.Name, entity.ParentId, entity.Id))
             {
-                return ResultModel.HasExists;
+                return ResultModel.Failed("所属部门中已存在名称相同的部门");
+            }
+            if (model.Code.NotNull() && await _repository.ExistsCode(entity.Code, entity.Id))
+            {
+                return ResultModel.Failed("编码已存在");
             }
 
+            entity.FullPath = entity.Name;
+            //查询父级
+            if (model.ParentId.NotEmpty())
+            {
+                var parent = await _repository.GetAsync(model.ParentId);
+                if (parent != null)
+                {
+                    //设置完整路径
+                    entity.FullPath = $"{parent.FullPath}/{entity.Name}";
+                }
+            }
             var result = await _repository.UpdateAsync(entity);
-
+            if (result)
+            {
+                await ClearCache();
+            }
             return ResultModel.Result(result);
         }
 
-        public async Task<string> GetFullPath(Guid id)
+        /// <summary>
+        /// 清除缓存
+        /// </summary>
+        /// <returns></returns>
+        private Task ClearCache()
         {
-            var path = string.Empty;
-            var entity = await _repository.GetAsync(id);
-            if (entity == null)
-                return path;
+            var task1 = _cacheHandler.RemoveAsync(CacheKeys.DepartmentTree);
+            var task2 = _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
 
-            path = entity.Name;
-            if (!entity.ParentId.IsEmpty())
-            {
-                path = (await GetFullPath(entity.ParentId)) + " / " + path;
-            }
-            else
-            {
-                //var company = await _companyRepository.GetAsync(entity.CompanyId);
-                //if (company != null)
-                //{
-                //    path = company.Name + " / " + path;
-                //}
-            }
-
-            return path;
+            return Task.WhenAll(task1, task2);
         }
     }
 }

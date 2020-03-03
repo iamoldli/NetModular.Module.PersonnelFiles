@@ -1,132 +1,161 @@
 <template>
-  <div class="nm-department-select">
-    <div class="nm-department-select-top">
-      <el-form class="nm-pf-dt-company-select" label-width="70px">
-        <el-form-item label="公司单位">
-          <company-select v-model="company.id" checked-first @change="onCompanyChange" />
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="nm-department-select-bottom">
-      <el-tree ref="tree" v-bind="tree" :current-node-key="selection.id" @current-change="onSelectChange" />
-    </div>
-  </div>
+  <nm-box v-bind="box">
+    <el-tree ref="tree" v-bind="tree" v-on="on">
+      <span slot-scope="{ data }">
+        <nm-icon :name="data.item.level === -1 ? 'home' : 'attachment'" />
+        <span class="nm-m-l-5">{{ data.label }}</span>
+      </span>
+    </el-tree>
+  </nm-box>
 </template>
 <script>
-import CompanySelect from '../../../company/components/select'
-
-const api = $api.personnelFiles.department
-
+const { getTree } = $api.personnelFiles.department
 export default {
-  components: { CompanySelect },
   data() {
     return {
-      selection: {
-        id: this.value,
-        name: '',
-        fullPath: '',
-        data: null
-      },
-      company: {
-        id: '',
-        name: ''
+      box: {
+        header: true,
+        title: '部门架构',
+        icon: 'tree',
+        page: true
       },
       tree: {
         data: [],
         nodeKey: 'id',
-        'highlight-current': true,
-        'show-checkbox': false,
-        'expand-on-click-node': false,
-        'default-expand-all': true
-      }
+        highlightCurrent: true,
+        props: { children: 'children', label: 'label' },
+        currentNodeKey: $const.emptyGuid,
+        expandOnClickNode: false,
+        defaultExpandedKeys: [$const.emptyGuid]
+      },
+      on: {
+        'current-change': this.onChange,
+        'node-expand': this.onNodeExpand,
+        'node-collapse': this.onNodeCollapse
+      },
+      selection: null
     }
   },
   props: {
-    value: {
-      type: String
+    //创建时刷新
+    refreshOnCreated: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
-    refresh() {
-      if (!this.company.id) {
-        this.tree.data = []
-        return
-      }
-      let root = { id: '', label: this.company.name, children: [] }
-      api.getTree(this.company.id).then(data => {
-        data.map(item => {
-          root.children.push(this.model2Tree(item))
-        })
+    //刷新
+    refresh(init) {
+      //获取单位名称
+      this.$config.get('CompanyName', 2, 'personnelfiles').then(name => {
+        getTree().then(data => {
+          const root = {
+            id: $const.emptyGuid,
+            label: name || '组织机构',
+            item: {
+              id: $const.emptyGuid,
+              name: name,
+              fullPath: '/'
+            },
+            children: data
+          }
+          this.tree.data = [root]
 
-        this.tree.data = [root]
-
-        this.$nextTick(() => {
-          this.$refs.tree.setCurrentKey(this.selection.id)
+          if (init) {
+            //初始化触发一次change事件
+            this.onChange(root)
+          } else {
+            //刷新要保留当前点击节点
+            this.$nextTick(() => {
+              this.$refs.tree.setCurrentKey(this.tree.currentNodeKey)
+            })
+          }
         })
       })
     },
-    model2Tree(model) {
-      let node = {
-        id: model.id,
-        label: model.name,
-        sort: model.sort,
-        children: []
-      }
-      if (model.children) {
-        model.children.map(item => [node.children.push(this.model2Tree(item))])
-      }
-      return node
+    onChange(data) {
+      if (this.selection === data) return
+
+      this.tree.currentNodeKey = data.id
+      this.selection = data
+      this.$emit('change', this.selection)
     },
-    onCompanyChange(val, selection) {
-      this.company.name = selection ? selection.label : ''
-      this.selection.id = ''
-      this.selection.name = ''
-      this.selection.fullPath = ''
-      this.refresh()
-      this.$emit('input', this.selection.id)
-      this.$emit('change', this.selection, this.company)
+    onNodeExpand(data) {
+      //记录展开的节点
+      this.tree.defaultExpandedKeys.push(data.id)
     },
-    onSelectChange(data, node) {
-      this.selection.id = data.id
-      this.selection.name = data.name
-      this.selection.fullPath = this.getFullPath(node)
-      this.selection.data = data.data
-      this.$emit('input', this.selection.id)
-      this.$emit('change', this.selection, this.company)
+    onNodeCollapse(data) {
+      //移除展开的节点
+      this.$_.pull(this.tree.defaultExpandedKeys, data.id)
     },
-    /**
-     * 获取节点的完整路径
-     */
-    getFullPath(node) {
-      if (node.parent === null || node.data.id === 0) {
-        return ''
+    /**插入 */
+    insert(data) {
+      //设置子节点
+      if (!data.children) {
+        data.children = []
       }
-      const parentPath = this.getFullPath(node.parent)
-      if (parentPath === '') {
-        return node.data.label
-      } else {
-        return parentPath + ' / ' + node.data.label
+
+      let children = this.selection.children
+      //如果不包含子节点，直接push，否则需要根据序号排序
+      if (children.length < 1) {
+        children.push(data)
+        return
+      }
+      for (let i = 0; i < children.length; i++) {
+        if (data.item.sort < children[i].item.sort) {
+          children.splice(i, 0, data)
+          break
+        }
+
+        //如果是最后一个，则附加到最后一个节点后面
+        if (i === children.length - 1) {
+          children.push(data)
+          break
+        }
       }
     },
+    /**删除 */
     remove(id) {
-      this.$refs.tree.remove(id)
+      let children = this.selection.children
+      for (let i = 0; i < children.length; i++) {
+        let child = children[i]
+        if (id === child.id) {
+          children.splice(i, 1)
+          return child
+        }
+      }
     },
-    reset() {
-      this.company.id = ''
-      this.company.name = ''
+    /**更新 */
+    update(model) {
+      //先判断是否展开,已展开的先删除
+      let expanded = this.$refs.tree.getNode(model.id).expanded
+      if (!expanded) {
+        this.$_.pull(this.tree.defaultExpandedKeys, model.id)
+      }
+      //保存原来的子节点，同时先删除，再添加，这样可以保证排序
+      model.children = this.remove(model.id).children
+      this.insert(model)
+      //若是展开状态要再次展开
+      if (expanded) {
+        this.tree.defaultExpandedKeys.push(model.id)
+      }
+    },
+    setCheckedKeys(checkedKeys) {
+      this.$nextTick(() => {
+        if (this.showCheckbox) {
+          this.$refs.tree.setCheckedKeys(checkedKeys)
+        }
+      })
+    },
+    /**排序，重新刷新 */
+    sort() {
+      this.refresh()
+    }
+  },
+  created() {
+    if (this.refreshOnCreated) {
+      this.refresh(true)
     }
   }
 }
 </script>
-<style lang="scss">
-.nm-department-select {
-  &-top {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-
-    .el-form-item {
-      margin: 0;
-    }
-  }
-}
-</style>

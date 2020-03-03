@@ -3,7 +3,8 @@
     <Id>PersonnelFiles</Id>
     <Name>人事档案</Name>
     <Authors>Oldli</Authors>
-    <Version>1.5.0</Version>
+    <Icon>personnel-files</Icon>
+    <Version>1.5.1</Version>
     <Description>NetModular Module $(Id)($(Name)) - $(MSBuildProjectName)</Description>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <LangVersion>Latest</LangVersion>

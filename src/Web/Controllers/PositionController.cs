@@ -1,9 +1,7 @@
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NetModular.Lib.Auth.Web.Attributes;
 using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.PositionService;
 using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
@@ -11,7 +9,7 @@ using NetModular.Module.PersonnelFiles.Domain.Position.Models;
 
 namespace NetModular.Module.PersonnelFiles.Web.Controllers
 {
-    [Description("岗位管理")]
+    [Description("职位管理")]
     public class PositionController : ModuleController
     {
         private readonly IPositionService _service;
@@ -23,7 +21,7 @@ namespace NetModular.Module.PersonnelFiles.Web.Controllers
 
         [HttpGet]
         [Description("查询")]
-        public Task<IResultModel> Query([FromQuery] PositionQueryModel model)
+        public Task<IResultModel> Query([FromQuery]PositionQueryModel model)
         {
             return _service.Query(model);
         }
@@ -37,16 +35,16 @@ namespace NetModular.Module.PersonnelFiles.Web.Controllers
 
         [HttpDelete]
         [Description("删除")]
-        public async Task<IResultModel> Delete([BindRequired] Guid id)
+        public Task<IResultModel> Delete([BindRequired]int id)
         {
-            return await _service.Delete(id);
+            return _service.Delete(id);
         }
 
         [HttpGet]
         [Description("编辑")]
-        public async Task<IResultModel> Edit([BindRequired] Guid id)
+        public Task<IResultModel> Edit([BindRequired]int id)
         {
-            return await _service.Edit(id);
+            return _service.Edit(id);
         }
 
         [HttpPost]
@@ -57,11 +55,10 @@ namespace NetModular.Module.PersonnelFiles.Web.Controllers
         }
 
         [HttpGet]
-        [Description("下拉列表")]
-        [Common]
-        public async Task<IResultModel> Select([BindRequired] Guid departmentId)
+        [Description("修改")]
+        public Task<IResultModel> Get([BindRequired]int id)
         {
-            return await _service.Select(departmentId);
+            return _service.Get(id);
         }
     }
 }

@@ -1,12 +1,18 @@
-export default []
+import DepartmentSelect from '../views/department/components/select'
+import PostSelect from '../views/post/components/select'
+import EmployeeSelect from './employee-select'
 
-/**  全局组件注册示例  */
-// import DictionarySelect from '../views/dictionary/select'
-//
-// export default [{
-/// /组件名称
-// name: 'nm-dictionary-select',
-/// /组件对象
-// component: DictionarySelect
-// }
-// ]
+export default [
+  {
+    name: 'nm-department-select',
+    component: DepartmentSelect
+  },
+  {
+    name: 'nm-post-select',
+    component: PostSelect
+  },
+  {
+    name: 'nm-employee-select',
+    component: EmployeeSelect
+  }
+]

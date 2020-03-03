@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels
@@ -9,21 +8,19 @@ namespace NetModular.Module.PersonnelFiles.Application.PositionService.ViewModel
     public class PositionAddModel
     {
         /// <summary>
-        /// 部门编码
-        /// </summary>
-        [Required(ErrorMessage = "请选择部门")]
-        public Guid DepartmentId { get; set; }
-
-        /// <summary>
         /// 名称
         /// </summary>
         [Required(ErrorMessage = "请输入岗位名称")]
         public string Name { get; set; }
 
         /// <summary>
+        /// 简称
+        /// </summary>
+        public string ShortName { get; set; }
+
+        /// <summary>
         /// 编码
         /// </summary>
         public string Code { get; set; }
-
     }
 }
