@@ -533,7 +533,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                 return ResultModel.NotExists;
 
             var accountTask = _accountRepository.GetAsync(employee.AccountId);
-            var rolesTask = _accountRoleRepository.QueryByRole(employee.AccountId);
+            var rolesTask = _accountRoleRepository.QueryRole(employee.AccountId);
 
             var account = await accountTask;
             var roles = await rolesTask;
@@ -542,7 +542,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
             {
                 Id = id,
                 UserName = account.UserName,
-                Roles = roles.Select(m => m.RoleId).ToList()
+                Roles = roles.Select(m => m.Id).ToList()
             };
 
             return ResultModel.Success(model);

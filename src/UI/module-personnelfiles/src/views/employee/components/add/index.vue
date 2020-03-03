@@ -24,7 +24,7 @@
       </el-col>
       <el-col :span="7">
         <el-form-item label="照片：" prop="picture">
-          <picture-upload v-model="form.model.picture" :disabled="readonly" />
+          <picture-upload v-model="form.model.picture" />
         </el-form-item>
         <el-form-item label="性质：" prop="nature">
           <nm-enum-select v-model="form.model.nature" module-code="personnelfiles" enum-name="EmployeeNature" />
