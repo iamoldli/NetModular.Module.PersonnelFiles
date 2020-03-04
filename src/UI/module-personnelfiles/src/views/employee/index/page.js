@@ -61,6 +61,22 @@ const page = new (function() {
       icon: 'edit',
       code: `${this.name}_leave`,
       permissions: [`${this.name}_leave_post`, `${this.name}_leaveinfo_get`]
+    },
+    preview: {
+      text: '预览',
+      type: 'text',
+      icon: 'preview',
+      code: `${this.name}_preview`,
+      permissions: [
+        `${this.name}_edit_get`,
+        `${this.name}_editcontact_get`,
+        `${this.name}_editpersonal_get`,
+        `${this.name}_familyquery_get`,
+        `${this.name}_educationquery_get`,
+        `${this.name}_workquery_get`,
+        `${this.name}_workedit_get`,
+        `${this.name}_editaccount_get`
+      ]
     }
   }
 })()

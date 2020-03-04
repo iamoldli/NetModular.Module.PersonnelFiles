@@ -22,9 +22,10 @@
           </template>
 
           <template v-slot:col-name="{ row }">
-            <el-tooltip effect="dark" content="详情预览" placement="top">
+            <el-tooltip v-if="_hasButton(buttons.preview)" effect="dark" content="详情预览" placement="top">
               <nm-button type="text" :text="row.name" @click="preview(row)" />
             </el-tooltip>
+            <span v-else>{{ row.name }}</span>
           </template>
 
           <template v-slot:col-statusName="{ row }">

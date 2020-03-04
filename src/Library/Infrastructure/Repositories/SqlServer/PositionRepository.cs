@@ -22,7 +22,7 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
             var paging = model.Paging();
 
             var query = Db.Find();
-            query.WhereNotNull(model.Name, m => m.Name.Contains(m.Name));
+            query.WhereNotNull(model.Name, m => m.Name.Contains(model.Name));
             query.WhereNotNull(model.Code, m => m.Code == model.Code);
 
             var joinQuery = query.LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id);

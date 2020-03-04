@@ -27,7 +27,7 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
             var query = Db.Find();
             query.WhereIf(model.DepartmentId != null && model.DepartmentId.Value.NotEmpty(), m => m.DepartmentId == model.DepartmentId);
             query.WhereNotNull(model.Name, m => m.Name.Contains(model.Name));
-            query.WhereNotNull(model.JobNo, m => m.Id == model.JobNo.Value - 1000000);
+            query.WhereNotNull(model.JobNo, m => m.Id == model.JobNo.Value);
 
             var joinQuery = query.LeftJoin<AccountEntity>((x, y) => x.CreatedBy == y.Id)
                 .LeftJoin<DepartmentEntity>((t1, t2, t3) => t1.DepartmentId == t3.Id)

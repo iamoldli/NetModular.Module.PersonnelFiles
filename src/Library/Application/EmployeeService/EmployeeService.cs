@@ -79,6 +79,11 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
 
         public async Task<IResultModel> Query(EmployeeQueryModel model)
         {
+            if (model.JobNo != null)
+            {
+                model.JobNo = model.JobNo - 1000000;
+            }
+
             var result = new QueryResultModel<EmployeeEntity>
             {
                 Rows = await _repository.Query(model),

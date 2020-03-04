@@ -10,8 +10,8 @@ export default {
           id: null
         },
         disabled: this.readonly,
-        loading: true,
-        noFooter: this.readonly
+        noFooter: this.readonly,
+        loading: true
       },
       on: {
         success: this.onSuccess
@@ -52,6 +52,7 @@ export default {
   watch: {
     readonly(val) {
       this.form.disabled = val
+      this.form.noFooter = val
     }
   }
 }

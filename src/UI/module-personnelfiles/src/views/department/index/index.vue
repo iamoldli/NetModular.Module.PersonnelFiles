@@ -36,7 +36,7 @@ export default {
       this.refreshList()
     },
     onSaveSuccess(model, data, isAdd) {
-      const nodeData = { id: model.id, label: model.name, item: model }
+      const nodeData = { id: model.id, label: model.name, item: Object.assign({}, model) }
       if (isAdd) {
         this.$refs.tree.insert(nodeData)
       } else {

@@ -22,7 +22,6 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories.SqlServer
             var paging = model.Paging();
 
             var query = Db.Find();
-            query.WhereNotNull(model.PositionId, m => m.PositionId == model.PositionId.Value);
             query.WhereNotNull(model.Name, m => m.Name.Contains(model.Name) || m.ShortName.Contains(model.Name));
 
             var joinQuery = query.LeftJoin<PositionEntity>((x, y) => x.PositionId == y.Id).LeftJoin<AccountEntity>((x, y, z) => x.CreatedBy == z.Id);

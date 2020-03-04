@@ -3,14 +3,8 @@
     <nm-list ref="list" v-bind="list">
       <!--查询条件-->
       <template v-slot:querybar>
-        <el-form-item label="职位编号：" prop="positionId">
-          <el-input v-model="list.model.positionId" clearable />
-        </el-form-item>
         <el-form-item label="名称：" prop="name">
-          <el-input v-model="list.model.name" clearable />
-        </el-form-item>
-        <el-form-item label="简称：" prop="shortName">
-          <el-input v-model="list.model.shortName" clearable />
+          <el-input v-model="list.model.name" clearable placeholder="请输入名称或简称" />
         </el-form-item>
       </template>
 
@@ -18,11 +12,6 @@
       <template v-slot:querybar-buttons>
         <nm-button v-bind="buttons.add" @click="add" />
       </template>
-
-      <!--自定义列-->
-      <!-- <template v-slot:col-name="{row}">
-        <nm-button :text="row.name" type="text" />
-      </template> -->
 
       <!--操作列-->
       <template v-slot:col-operation="{ row }">
@@ -53,12 +42,7 @@ export default {
         cols,
         action: api.query,
         model: {
-          /** 职位编号 */
-          positionId: '',
-          /** 名称 */
-          name: '',
-          /** 简称 */
-          shortName: ''
+          name: ''
         }
       },
       removeAction: api.remove,

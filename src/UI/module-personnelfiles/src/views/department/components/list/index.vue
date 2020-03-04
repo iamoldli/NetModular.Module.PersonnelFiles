@@ -68,7 +68,7 @@ export default {
     },
     onSaveSuccess(model, data, isAdd) {
       if (isAdd) {
-        model.id = data
+        model.id = data.id
       }
       this.$emit('save-success', model, data, isAdd)
     },

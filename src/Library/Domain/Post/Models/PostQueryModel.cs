@@ -9,10 +9,5 @@ namespace  NetModular.Module.PersonnelFiles.Domain.Post.Models
         /// 名称
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 职位编号
-        /// </summary>
-        public int? PositionId { get; set; }
     }
 }
