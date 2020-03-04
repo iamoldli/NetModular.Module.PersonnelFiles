@@ -50,7 +50,7 @@ export default {
     }
   },
   props: {
-    value: String,
+    value: [Number, String],
     clearable: Boolean
   },
   methods: {
