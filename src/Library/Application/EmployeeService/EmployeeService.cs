@@ -12,7 +12,6 @@ using NetModular.Module.Admin.Application.AccountService;
 using NetModular.Module.Admin.Application.AccountService.ViewModels;
 using NetModular.Module.Admin.Domain.Account;
 using NetModular.Module.Admin.Domain.AccountRole;
-using NetModular.Module.Admin.Infrastructure.PasswordHandler;
 using NetModular.Module.Admin.Infrastructure.Repositories;
 using NetModular.Module.PersonnelFiles.Application.EmployeeService.ResultModels;
 using NetModular.Module.PersonnelFiles.Application.EmployeeService.ViewModels;
@@ -50,10 +49,9 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
         private readonly AdminDbContext _adminDbContext;
         private readonly PersonnelFilesDbContext _dbContext;
         private readonly ICacheHandler _cacheHandler;
-        private readonly IPasswordHandler _passwordHandler;
         private readonly PersonnelFilesOptions _options;
 
-        public EmployeeService(IMapper mapper, IEmployeeRepository repository, IAccountService accountService, IAccountRepository accountRepository, IEmployeeContactRepository contactRepository, AdminDbContext adminDbContext, PersonnelFilesDbContext dbContext, IEmployeeLeaveInfoRepository leaveInfoRepository, IEmployeePersonalRepository personalRepository, IEmployeeFamilyRepository familyRepository, IEmployeeEducationRepository educationRepository, IEmployeeWorkRepository workRepository, IEmployeeLatestSelectRepository latestSelectRepository, ICacheHandler cacheHandler, IDepartmentRepository departmentRepository, IAccountRoleRepository accountRoleRepository, IPasswordHandler passwordHandler, PersonnelFilesOptions options)
+        public EmployeeService(IMapper mapper, IEmployeeRepository repository, IAccountService accountService, IAccountRepository accountRepository, IEmployeeContactRepository contactRepository, AdminDbContext adminDbContext, PersonnelFilesDbContext dbContext, IEmployeeLeaveInfoRepository leaveInfoRepository, IEmployeePersonalRepository personalRepository, IEmployeeFamilyRepository familyRepository, IEmployeeEducationRepository educationRepository, IEmployeeWorkRepository workRepository, IEmployeeLatestSelectRepository latestSelectRepository, ICacheHandler cacheHandler, IDepartmentRepository departmentRepository, IAccountRoleRepository accountRoleRepository, PersonnelFilesOptions options)
         {
             _mapper = mapper;
             _repository = repository;
@@ -71,7 +69,6 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
             _cacheHandler = cacheHandler;
             _departmentRepository = departmentRepository;
             _accountRoleRepository = accountRoleRepository;
-            _passwordHandler = passwordHandler;
             _options = options;
         }
 
@@ -178,6 +175,22 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
             var result = await _repository.UpdateAsync(entity);
             if (result)
             {
+                var account = await _accountRepository.GetAsync(entity.AccountId);
+                if (account != null)
+                {
+                    var syncModel = new AccountSyncModel
+                    {
+                        Id = account.Id,
+                        Name = entity.Name,
+                        Email = account.Email,
+                        Phone = account.Phone,
+                        Roles = null,
+                        UserName = account.UserName
+                    };
+
+                    await _accountService.Sync(syncModel);
+                }
+
                 //清除缓存
                 await _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
                 await _cacheHandler.RemoveAsync($"{CacheKeys.EmployeeBaseInfo}{entity.Id}");
@@ -341,6 +354,10 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
 
         public async Task<IResultModel> UpdateContact(EmployeeContactUpdateModel model)
         {
+            var employee = await _repository.GetAsync(model.EmployeeId);
+            if (employee == null)
+                return ResultModel.NotExists;
+
             var entity = await _contactRepository.GetByEmployee(model.EmployeeId) ?? new EmployeeContactEntity();
 
             _mapper.Map(model, entity);
@@ -359,7 +376,28 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                 result = await _contactRepository.AddAsync(entity);
             }
 
-            return ResultModel.Result(result);
+            if (result)
+            {
+                var account = await _accountRepository.GetAsync(employee.AccountId);
+                if (account != null)
+                {
+                    var syncModel = new AccountSyncModel
+                    {
+                        Id = account.Id,
+                        Name = account.Name,
+                        Email = model.Email ?? string.Empty,
+                        Phone = model.Phone ?? string.Empty,
+                        Roles = null,
+                        UserName = account.UserName
+                    };
+
+                    await _accountService.Sync(syncModel);
+                }
+
+                return ResultModel.Success();
+            }
+
+            return ResultModel.Failed();
         }
 
         public async Task<IResultModel> ContactDetails(int id)
@@ -570,14 +608,19 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
             var account = await _accountRepository.GetAsync(employee.AccountId);
             if (account != null)
             {
-                account.UserName = model.UserName;
-                if (model.Password.NotNull())
+                var syncModel = new AccountSyncModel
                 {
-                    account.Password = _passwordHandler.Encrypt(account.UserName, account.Password);
-                }
+                    Id = account.Id,
+                    Name = account.Name,
+                    Email = account.Email,
+                    Phone = account.Phone,
+                    Roles = model.Roles,
+                    UserName = model.UserName,
+                    NewPassword = model.Password
+                };
 
-                var result = await _accountRepository.UpdateAsync(account);
-                return ResultModel.Result(result);
+                var result = await _accountService.Sync(syncModel);
+                return ResultModel.Result(result.Successful);
             }
 
             return ResultModel.Failed();

@@ -4,7 +4,7 @@
   //数据库类型 0、SqlServer 1、MySql 2、SQLite
   "Dialect": 2,
   //数据库版本
-  "Version": "",
+  "Version": "..\\..\\Data\\SQLite",
   //数据库地址
   "Server": "",
   //端口号
