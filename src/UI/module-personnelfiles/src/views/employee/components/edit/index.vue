@@ -45,7 +45,7 @@ import WorkPage from './components/work'
 import AccountPage from './components/account'
 
 export default {
-  mixins: [mixins.dialog],
+  mixins: [mixins.visible],
   components: { BasePage, PersonalPage, ContactPage, FamilyPage, EducationPage, WorkPage, AccountPage },
   data() {
     return {
@@ -84,9 +84,7 @@ export default {
       if (this.id_ !== this.id) {
         this.id_ = this.id
         this.tab = 'base'
-        this.$nextTick(() => {
-          this.refresh()
-        })
+        this.refresh()
       }
     },
     onTabClick() {
