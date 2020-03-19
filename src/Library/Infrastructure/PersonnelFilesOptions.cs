@@ -1,5 +1,4 @@
 using NetModular.Lib.Options.Abstraction;
-using NetModular.Lib.Utils.Core.Extensions;
 
 namespace NetModular.Module.PersonnelFiles.Infrastructure
 {
@@ -37,5 +36,17 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure
         /// </summary>
         [ModuleOptionDefinition("公司单位传真")]
         public string CompanyFax { get; set; }
+
+        public IModuleOptions Copy()
+        {
+            return new PersonnelFilesOptions
+            {
+                CompanyName = CompanyName,
+                CompanyAddress = CompanyAddress,
+                CompanyContact = CompanyContact,
+                CompanyFax = CompanyFax,
+                CompanyPhone = CompanyPhone
+            };
+        }
     }
 }
