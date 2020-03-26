@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
 using NetModular.Module.PersonnelFiles.Domain.Position;

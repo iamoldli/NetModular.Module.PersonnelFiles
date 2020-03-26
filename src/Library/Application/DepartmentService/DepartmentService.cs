@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using NetModular.Lib.Cache.Abstractions;
-using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.DepartmentService.ResultModels;
 using NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewModels;

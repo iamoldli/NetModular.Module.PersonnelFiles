@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using NetModular.Lib.Data.Abstractions;
 using NetModular.Lib.Data.Core;
 using NetModular.Lib.Data.Query;
-using NetModular.Lib.Utils.Core.Extensions;
 using NetModular.Module.Admin.Domain.Account;
 using NetModular.Module.PersonnelFiles.Domain.Department;
 using NetModular.Module.PersonnelFiles.Domain.Employee;
