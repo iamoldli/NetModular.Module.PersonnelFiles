@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
 using NetModular.Module.PersonnelFiles.Domain.Position.Models;
 

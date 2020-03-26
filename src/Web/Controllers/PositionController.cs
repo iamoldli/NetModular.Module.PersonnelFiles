@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.PositionService;
 using NetModular.Module.PersonnelFiles.Application.PositionService.ViewModels;
 using NetModular.Module.PersonnelFiles.Domain.Position.Models;

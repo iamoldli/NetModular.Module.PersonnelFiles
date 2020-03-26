@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.EmployeeService.ViewModels;
 using NetModular.Module.PersonnelFiles.Domain.Employee.Models;
 using NetModular.Module.PersonnelFiles.Domain.EmployeeLatestSelect.Models;

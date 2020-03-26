@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NetModular.Lib.Auth.Abstractions;
 using NetModular.Lib.Auth.Web.Attributes;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.EmployeeService;
 using NetModular.Module.PersonnelFiles.Application.EmployeeService.ViewModels;
 using NetModular.Module.PersonnelFiles.Domain.Employee.Models;

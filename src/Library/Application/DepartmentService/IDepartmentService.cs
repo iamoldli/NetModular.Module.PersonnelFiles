@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.PersonnelFiles.Application.DepartmentService.ViewModels;
 using NetModular.Module.PersonnelFiles.Domain.Department.Models;
 
