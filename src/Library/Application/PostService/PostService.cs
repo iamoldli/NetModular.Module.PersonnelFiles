@@ -46,7 +46,7 @@ namespace NetModular.Module.PersonnelFiles.Application.PostService
             var result = await _repository.AddAsync(entity);
             if (result)
             {
-                await _cacheHandler.RemoveAsync(CacheKeys.PostSelect);
+                await _cacheHandler.RemoveAsync(CacheKeys.POST_SELECT);
             }
             return ResultModel.Result(result);
         }
@@ -62,7 +62,7 @@ namespace NetModular.Module.PersonnelFiles.Application.PostService
             var result = await _repository.DeleteAsync(id);
             if (result)
             {
-                await _cacheHandler.RemoveAsync(CacheKeys.PostSelect);
+                await _cacheHandler.RemoveAsync(CacheKeys.POST_SELECT);
             }
             return ResultModel.Result(result);
         }
@@ -91,14 +91,14 @@ namespace NetModular.Module.PersonnelFiles.Application.PostService
             var result = await _repository.UpdateAsync(entity);
             if (result)
             {
-                await _cacheHandler.RemoveAsync(CacheKeys.PostSelect);
+                await _cacheHandler.RemoveAsync(CacheKeys.POST_SELECT);
             }
             return ResultModel.Result(result);
         }
 
         public async Task<IResultModel> Select()
         {
-            if (!_cacheHandler.TryGetValue(CacheKeys.PostSelect, out List<OptionResultModel> list))
+            if (!_cacheHandler.TryGetValue(CacheKeys.POST_SELECT, out List<OptionResultModel> list))
             {
                 var all = await _repository.GetAllAsync();
                 list = all.Select(m => new OptionResultModel
@@ -107,7 +107,7 @@ namespace NetModular.Module.PersonnelFiles.Application.PostService
                     Value = m.Id
                 }).ToList();
 
-                await _cacheHandler.SetAsync(CacheKeys.PostSelect, list);
+                await _cacheHandler.SetAsync(CacheKeys.POST_SELECT, list);
             }
 
             return ResultModel.Success(list);

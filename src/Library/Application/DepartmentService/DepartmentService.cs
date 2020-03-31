@@ -31,13 +31,13 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
 
         public async Task<IResultModel> GetTree()
         {
-            if (_cacheHandler.TryGetValue(CacheKeys.DepartmentTree, out List<TreeResultModel<Guid, DepartmentTreeResultModel>> list))
+            if (_cacheHandler.TryGetValue(CacheKeys.DEPARTMENT_TREE, out List<TreeResultModel<Guid, DepartmentTreeResultModel>> list))
                 return ResultModel.Success(list);
 
             var all = await _repository.GetAllAsync();
             list = ResolveTree(all, Guid.Empty);
 
-            await _cacheHandler.SetAsync(CacheKeys.DepartmentTree, list);
+            await _cacheHandler.SetAsync(CacheKeys.DEPARTMENT_TREE, list);
 
             return ResultModel.Success(list);
         }
@@ -172,8 +172,8 @@ namespace NetModular.Module.PersonnelFiles.Application.DepartmentService
         /// <returns></returns>
         private Task ClearCache()
         {
-            var task1 = _cacheHandler.RemoveAsync(CacheKeys.DepartmentTree);
-            var task2 = _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
+            var task1 = _cacheHandler.RemoveAsync(CacheKeys.DEPARTMENT_TREE);
+            var task2 = _cacheHandler.RemoveAsync(CacheKeys.EMPLOYEE_TREE);
 
             return Task.WhenAll(task1, task2);
         }

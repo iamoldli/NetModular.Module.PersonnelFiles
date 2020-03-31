@@ -112,7 +112,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                 entity.AccountId = result.Data;
                 if (await _repository.AddAsync(entity))
                 {
-                    await _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
+                    await _cacheHandler.RemoveAsync(CacheKeys.EMPLOYEE_TREE);
                     return ResultModel.Success();
                 }
             }
@@ -143,8 +143,8 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                     adminUow.Commit();
 
                     //清除缓存
-                    await _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
-                    await _cacheHandler.RemoveAsync($"{CacheKeys.EmployeeBaseInfo}{employee.Id}");
+                    await _cacheHandler.RemoveAsync(CacheKeys.EMPLOYEE_TREE);
+                    await _cacheHandler.RemoveAsync($"{CacheKeys.EMPLOYEE_BASE_INFO}:{employee.Id}");
 
                     return ResultModel.Success();
                 }
@@ -191,8 +191,8 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                 }
 
                 //清除缓存
-                await _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
-                await _cacheHandler.RemoveAsync($"{CacheKeys.EmployeeBaseInfo}{entity.Id}");
+                await _cacheHandler.RemoveAsync(CacheKeys.EMPLOYEE_TREE);
+                await _cacheHandler.RemoveAsync($"{CacheKeys.EMPLOYEE_BASE_INFO}:{entity.Id}");
             }
             return ResultModel.Result(result);
         }
@@ -217,8 +217,8 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                     uow.Commit();
 
                     //清除缓存
-                    await _cacheHandler.RemoveAsync(CacheKeys.EmployeeTree);
-                    await _cacheHandler.RemoveAsync($"{CacheKeys.EmployeeBaseInfo}{entity.Id}");
+                    await _cacheHandler.RemoveAsync(CacheKeys.EMPLOYEE_TREE);
+                    await _cacheHandler.RemoveAsync($"{CacheKeys.EMPLOYEE_BASE_INFO}:{entity.Id}");
 
                     return ResultModel.Success();
                 }
@@ -696,7 +696,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
 
         public async Task<IResultModel> GetTree()
         {
-            if (_cacheHandler.TryGetValue(CacheKeys.EmployeeTree, out TreeResultModel<int, EmployeeTreeResultModel> root))
+            if (_cacheHandler.TryGetValue(CacheKeys.EMPLOYEE_TREE, out TreeResultModel<int, EmployeeTreeResultModel> root))
                 return ResultModel.Success(root);
 
             var allDepart = await _departmentRepository.GetAllAsync();
@@ -717,7 +717,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
 
             if (root.Children.Any())
             {
-                await _cacheHandler.SetAsync(CacheKeys.EmployeeTree, root);
+                await _cacheHandler.SetAsync(CacheKeys.EMPLOYEE_TREE, root);
             }
 
             return ResultModel.Success(root);
@@ -779,7 +779,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
             {
                 foreach (var id in ids)
                 {
-                    var key = $"{CacheKeys.EmployeeBaseInfo}{id}";
+                    var key = $"{CacheKeys.EMPLOYEE_BASE_INFO}:{id}";
                     if (!_cacheHandler.TryGetValue(key, out EmployeeEntity employee))
                     {
                         employee = await _repository.GetWidthExtend(id);
