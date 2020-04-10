@@ -16,6 +16,7 @@ module.exports = {
   devServer: {
     port: 5224
   },
+  transpileDependencies: ['netmodular-*', 'element-ui'],
   configureWebpack() {
     let config = {
       plugins: [
