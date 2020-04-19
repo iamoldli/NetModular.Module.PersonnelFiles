@@ -1,7 +1,7 @@
 import WebHost from 'netmodular-module-admin'
 import Common from 'netmodular-module-common'
-import config from './config'
 import PersonnelFiles from './index'
+import config from './config'
 
 // 注入模块
 WebHost.registerModule(PersonnelFiles)

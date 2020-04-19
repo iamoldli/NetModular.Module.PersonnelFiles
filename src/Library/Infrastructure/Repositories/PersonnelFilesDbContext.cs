@@ -6,7 +6,7 @@ namespace NetModular.Module.PersonnelFiles.Infrastructure.Repositories
 {
     public class PersonnelFilesDbContext : DbContext
     {
-        public PersonnelFilesDbContext(IDbContextOptions options, IServiceProvider serviceProvider) : base(options, serviceProvider)
+        public PersonnelFilesDbContext(IDbContextOptions options) : base(options)
         {
         }
     }

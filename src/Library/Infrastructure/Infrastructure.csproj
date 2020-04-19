@@ -7,8 +7,8 @@
   <Import Project="..\..\..\build\module.build.targets" />
 
   <ItemGroup>
-    <PackageReference Include="NetModular.Lib.Options.Abstraction" Version="1.9.4" />
-    <PackageReference Include="NetModular.Module.Admin.Domain" Version="1.9.7" />
+    <PackageReference Include="NetModular.Lib.Config.Abstractions" Version="1.9.0" />
+    <PackageReference Include="NetModular.Module.Admin.Domain" Version="1.9.10" />
   </ItemGroup>
   
   <ItemGroup>

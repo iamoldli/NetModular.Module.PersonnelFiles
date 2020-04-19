@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using NetModular.Lib.Auth.Abstractions;
 using NetModular.Lib.Cache.Abstractions;
+using NetModular.Lib.Config.Abstractions;
 using NetModular.Lib.Utils.Core.Models;
 using NetModular.Lib.Utils.Core.Result;
 using NetModular.Module.Admin.Application.AccountService;
@@ -48,9 +49,9 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
         private readonly AdminDbContext _adminDbContext;
         private readonly PersonnelFilesDbContext _dbContext;
         private readonly ICacheHandler _cacheHandler;
-        private readonly PersonnelFilesOptions _options;
+        private readonly IConfigProvider _configProvider;
 
-        public EmployeeService(IMapper mapper, IEmployeeRepository repository, IAccountService accountService, IAccountRepository accountRepository, IEmployeeContactRepository contactRepository, AdminDbContext adminDbContext, PersonnelFilesDbContext dbContext, IEmployeeLeaveInfoRepository leaveInfoRepository, IEmployeePersonalRepository personalRepository, IEmployeeFamilyRepository familyRepository, IEmployeeEducationRepository educationRepository, IEmployeeWorkRepository workRepository, IEmployeeLatestSelectRepository latestSelectRepository, ICacheHandler cacheHandler, IDepartmentRepository departmentRepository, IAccountRoleRepository accountRoleRepository, PersonnelFilesOptions options)
+        public EmployeeService(IMapper mapper, IEmployeeRepository repository, IAccountService accountService, IAccountRepository accountRepository, IEmployeeContactRepository contactRepository, AdminDbContext adminDbContext, PersonnelFilesDbContext dbContext, IEmployeeLeaveInfoRepository leaveInfoRepository, IEmployeePersonalRepository personalRepository, IEmployeeFamilyRepository familyRepository, IEmployeeEducationRepository educationRepository, IEmployeeWorkRepository workRepository, IEmployeeLatestSelectRepository latestSelectRepository, ICacheHandler cacheHandler, IDepartmentRepository departmentRepository, IAccountRoleRepository accountRoleRepository, IConfigProvider configProvider)
         {
             _mapper = mapper;
             _repository = repository;
@@ -68,7 +69,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
             _cacheHandler = cacheHandler;
             _departmentRepository = departmentRepository;
             _accountRoleRepository = accountRoleRepository;
-            _options = options;
+            _configProvider = configProvider;
         }
 
         #region ==基本信息==
@@ -700,14 +701,14 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                 return ResultModel.Success(root);
 
             var allDepart = await _departmentRepository.GetAllAsync();
-
+            var config = _configProvider.Get<PersonnelFilesConfig>();
             root = new TreeResultModel<int, EmployeeTreeResultModel>
             {
-                Label = _options.CompanyName,
+                Label = config.CompanyName,
                 Item = new EmployeeTreeResultModel
                 {
                     SourceId = "",
-                    Name = _options.CompanyName
+                    Name = config.CompanyName
                 }
             };
 
