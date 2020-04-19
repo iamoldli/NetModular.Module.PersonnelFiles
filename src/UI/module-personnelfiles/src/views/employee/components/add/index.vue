@@ -43,7 +43,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="密码：" prop="password">
-          <el-input v-model="form.model.password" clearable :placeholder="`默认密码：${defaultPass}`">
+          <el-input v-model="form.model.password" clearable>
             <nm-icon name="password" slot="prefix" />
           </el-input>
         </el-form-item>
@@ -72,7 +72,6 @@ export default {
   components: { PictureUpload },
   data() {
     return {
-      defaultPass: '',
       form: {
         title: '新建人员',
         icon: 'add',
@@ -151,11 +150,6 @@ export default {
       this.$emit('success')
     },
     onOpen() {
-      if (!this.defaultPass) {
-        this.$config.get('DefaultPassword', 2, 'Admin').then(pass => {
-          this.defaultPass = pass
-        })
-      }
       this.$refs.form.reset()
     },
     onReset() {
