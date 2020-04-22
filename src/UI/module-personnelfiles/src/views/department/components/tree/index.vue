@@ -10,6 +10,7 @@
 </template>
 <script>
 const { getTree } = $api.personnelFiles.department
+const companyApi = $api.personnelFiles.company
 export default {
   data() {
     return {
@@ -47,14 +48,14 @@ export default {
     //刷新
     refresh(init) {
       //获取单位名称
-      this.$config.get('CompanyName', 2, 'personnelfiles').then(name => {
+      companyApi.get('CompanyName', 2, 'personnelfiles').then(company => {
         getTree().then(data => {
           const root = {
             id: $const.emptyGuid,
-            label: name || '组织机构',
+            label: company.name || '组织机构',
             item: {
               id: $const.emptyGuid,
-              name: name,
+              name: company.name,
               fullPath: '/'
             },
             children: data
