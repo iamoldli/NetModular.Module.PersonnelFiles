@@ -1,7 +1,7 @@
 {
   "id": 4,
   "name": "netmodular-module-personnelfiles",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "code": "personnelFiles",
   "title": "人事档案",
   "description": "人事档案",

@@ -1,6 +1,6 @@
 <template>
   <nm-form-page v-bind="form">
-    <el-row :gutter="20">
+    <el-row>
       <el-col :span="10" :offset="1">
         <el-form-item label="公司单位名称：" prop="companyName">
           <el-input v-model="form.model.companyName" />
@@ -11,6 +11,8 @@
           <el-input v-model="form.model.companyAddress" />
         </el-form-item>
       </el-col>
+    </el-row>
+    <el-row>
       <el-col :span="10" :offset="1">
         <el-form-item label="公司单位联系人：" prop="companyContact">
           <el-input v-model="form.model.companyContact" />
@@ -21,6 +23,8 @@
           <el-input v-model="form.model.companyPhone" />
         </el-form-item>
       </el-col>
+    </el-row>
+    <el-row>
       <el-col :span="10" :offset="1">
         <el-form-item label="公司单位传真：" prop="companyFax">
           <el-input v-model="form.model.companyFax" />
