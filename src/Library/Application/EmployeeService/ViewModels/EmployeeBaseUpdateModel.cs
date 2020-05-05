@@ -40,7 +40,7 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService.ViewModel
         /// <summary>
         /// 照片(附件编号)
         /// </summary>
-        public Guid? Picture { get; set; }
+        public string Picture { get; set; }
 
         /// <summary>
         /// 岗位编号

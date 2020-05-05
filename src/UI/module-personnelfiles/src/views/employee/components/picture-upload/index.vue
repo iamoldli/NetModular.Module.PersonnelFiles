@@ -1,8 +1,8 @@
 <template>
   <div class="nm-employee-picture-upload">
-    <nm-attachment-upload-img v-model="value_" v-bind="options" :disabled="disabled">
+    <nm-file-upload-img v-model="value_" v-bind="options" :disabled="disabled">
       <template v-slot:text>请选择文件</template>
-    </nm-attachment-upload-img>
+    </nm-file-upload-img>
   </div>
 </template>
 <script>
@@ -39,7 +39,7 @@ export default {
 .nm-employee-picture-upload {
   height: 133px;
 
-  .nm-attachment-upload-img {
+  .nm-file-upload-img {
     position: absolute;
     height: 100% !important;
     width: 100% !important;

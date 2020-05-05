@@ -39,7 +39,9 @@ namespace NetModular.Module.PersonnelFiles.Domain.Employee
         /// <summary>
         /// 照片(附件编号)
         /// </summary>
-        public Guid? Picture { get; set; }
+        [Nullable]
+        [Length(200)]
+        public string Picture { get; set; }
 
         /// <summary>
         /// 岗位编号
