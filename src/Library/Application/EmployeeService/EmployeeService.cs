@@ -104,7 +104,8 @@ namespace NetModular.Module.PersonnelFiles.Application.EmployeeService
                 Name = model.Name,
                 Password = model.Password,
                 IsLock = true,
-                Roles = model.Roles
+                Roles = model.Roles,
+                Status = AccountStatus.Active
             };
 
             var result = await _accountService.Add(account);

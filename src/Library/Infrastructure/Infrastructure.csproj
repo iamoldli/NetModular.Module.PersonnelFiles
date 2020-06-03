@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="NetModular.Lib.Config.Abstractions" Version="1.9.2" />
-    <PackageReference Include="NetModular.Module.Admin.Domain" Version="1.9.23" />
+    <PackageReference Include="NetModular.Module.Admin.Domain" Version="1.9.24" />
   </ItemGroup>
   
   <ItemGroup>
