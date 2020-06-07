@@ -10,15 +10,15 @@
 
   <ItemGroup>
     <PackageReference Include="NetModular.Lib.Cache.MemoryCache" Version="1.9.17" />
-    <PackageReference Include="NetModular.Lib.Data.MySql" Version="1.9.27" />
-    <PackageReference Include="NetModular.Lib.Data.PostgreSQL" Version="1.9.27" />
-    <PackageReference Include="NetModular.Lib.Data.SQLite" Version="1.9.27" />
-    <PackageReference Include="NetModular.Lib.Data.SqlServer" Version="1.9.27" />
-    <PackageReference Include="NetModular.Lib.Excel.EPPlus" Version="1.9.8" />
-    <PackageReference Include="NetModular.Lib.Host.Web" Version="1.9.24" />
-    <PackageReference Include="NetModular.Lib.OSS.Local" Version="1.9.4" />
-    <PackageReference Include="NetModular.Module.Admin.Web" Version="1.9.24" />
-    <PackageReference Include="NetModular.Module.Common.Web" Version="1.7.4" />
+    <PackageReference Include="NetModular.Lib.Data.MySql" Version="1.9.28" />
+    <PackageReference Include="NetModular.Lib.Data.PostgreSQL" Version="1.9.28" />
+    <PackageReference Include="NetModular.Lib.Data.SQLite" Version="1.9.28" />
+    <PackageReference Include="NetModular.Lib.Data.SqlServer" Version="1.9.28" />
+    <PackageReference Include="NetModular.Lib.Excel.EPPlus" Version="1.9.10" />
+    <PackageReference Include="NetModular.Lib.Host.Web" Version="1.9.30" />
+    <PackageReference Include="NetModular.Lib.OSS.Local" Version="1.9.6" />
+    <PackageReference Include="NetModular.Module.Admin.Web" Version="1.9.27" />
+    <PackageReference Include="NetModular.Module.Common.Web" Version="1.7.6" />
   </ItemGroup>
 
   <ItemGroup>
