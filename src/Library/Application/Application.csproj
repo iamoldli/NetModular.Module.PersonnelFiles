@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="NetModular.Lib.Mapper.AutoMapper" Version="2.0.0" />
-    <PackageReference Include="NetModular.Module.Admin.Application" Version="2.0.0" />
+    <PackageReference Include="NetModular.Module.Admin.Application" Version="2.0.7" />
   </ItemGroup>
   
   <ItemGroup>
