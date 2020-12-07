@@ -1,7 +1,7 @@
 {
   "id": 4,
   "name": "netmodular-module-personnelfiles",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "code": "personnelFiles",
   "title": "人事档案",
   "description": "人事档案",
@@ -20,7 +20,7 @@
   "dependencies": {
     "netmodular-module-admin": "^1.4.6",
     "netmodular-module-common": "^1.2.5",
-    "netmodular-ui": "^1.7.13"
+    "netmodular-ui": "^2.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.1",
